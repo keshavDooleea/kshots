@@ -39,8 +39,14 @@
     }
   }
 
-  .icon {
-    margin-left: 6px;
+  .navRight {
+    button {
+      margin-left: 10px;
+
+      .icon {
+        margin-left: 6px;
+      }
+    }
   }
 }
 

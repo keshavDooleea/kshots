@@ -1,7 +1,7 @@
 import CommonStyles from "../styles/CommonLayout.module.scss";
 import { signOut, useSession } from "next-auth/client";
 import Head from "../Components/Head";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface ICommonProps {
@@ -9,8 +9,23 @@ interface ICommonProps {
   title: string;
 }
 
+interface INavItem {
+  name: string;
+  icon: any;
+  onClick?: () => void;
+}
+
 const CommonLayout = ({ children, title }: ICommonProps) => {
   const [session, setSession] = useSession();
+
+  const NavItem = ({ name, icon, onClick }: INavItem) => {
+    return (
+      <button className={CommonStyles.signOutBtn} onClick={onClick}>
+        {name}
+        <FontAwesomeIcon icon={icon} className={CommonStyles.icon} />
+      </button>
+    );
+  };
 
   return (
     <div className={CommonStyles.body}>
@@ -24,14 +39,14 @@ const CommonLayout = ({ children, title }: ICommonProps) => {
           </h4>
           {session?.user?.image && (
             <div className={CommonStyles.img}>
-              <img src={session?.user?.image as string} alt="Picture of the author" loading="lazy" />
+              <img src={session?.user?.image as string} alt="User's profile picture" loading="lazy" />
             </div>
           )}
         </span>
-        <button className={CommonStyles.signOutBtn} onClick={() => signOut({ callbackUrl: "/" })}>
-          Sign Out
-          <FontAwesomeIcon icon={faSignOutAlt} className={CommonStyles.icon} />
-        </button>
+        <span className={CommonStyles.navRight}>
+          <NavItem name="Create Folder" icon={faPlus} />
+          <NavItem name="Sign Out" icon={faSignOutAlt} onClick={() => signOut({ callbackUrl: "/" })} />
+        </span>
       </nav>
 
       <div className={CommonStyles.main}>{children}</div>
