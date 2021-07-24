@@ -1,0 +1,54 @@
+@use "./Common.module.scss" as commonStyles;
+
+.body {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg);
+  @include commonStyles.flexCenter();
+  font-size: 18px;
+  position: relative;
+}
+
+.nav {
+  width: 100vw;
+  height: calc((100vh - var(--mainHeight)) / 2);
+  padding: 0 calc((100vw - var(--mainWidth)) / 2);
+  @include commonStyles.abs(0, auto, auto, 0, 0, 0);
+  @include commonStyles.flex(row, center, space-between);
+
+  .navLeft {
+    @include commonStyles.flex(row, center, space-between);
+
+    small {
+      margin-right: 5px;
+    }
+
+    .img {
+      width: 26px;
+      height: 26px;
+      margin-left: 8px;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+      border-radius: 50%;
+      padding: 2px;
+      border: 1px solid gray;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 50%;
+    }
+  }
+
+  .icon {
+    margin-left: 6px;
+  }
+}
+
+.main {
+  width: var(--mainWidth);
+  height: var(--mainHeight);
+  background-color: var(--main);
+  border-radius: var(--radius);
+  box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, 0.4);
+  @include commonStyles.flex(column, center, space-evenly);
+}

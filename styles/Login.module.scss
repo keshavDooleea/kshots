@@ -1,21 +1,6 @@
 @use "./Common.module.scss" as commonStyles;
 
-.body {
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--bg);
-  @include commonStyles.flexCenter();
-  font-size: 18px;
-}
-
-.main {
-  width: 85vw;
-  height: 85vh;
-  background-color: var(--main);
-  border-radius: var(--radius);
-  box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, 0.4);
-  @include commonStyles.flex(column, center, space-evenly);
-
+.loginMain {
   & > span {
     position: relative;
 
@@ -24,43 +9,11 @@
       @include commonStyles.abs(auto, auto, -40px, 50%, -50%, 0);
     }
   }
-}
 
-.title {
-  color: var(--textColor);
-  @include commonStyles.flex(column, center, center);
-
-  span {
-    width: 100%;
-    border: 2px solid var(--textColor);
-    border-radius: 50px;
-    position: relative;
-
-    &::before {
-      content: "";
-      @include commonStyles.abs(auto, 50%, 0, auto, -5px, 9px);
-      border: 2px solid var(--textColor);
-      border-radius: 50px;
-      width: 20%;
+  .signInBtn {
+    .icon {
+      font-size: 2em;
+      margin-bottom: 10px;
     }
-
-    &::after {
-      content: "";
-      @include commonStyles.abs(auto, 0, 0, auto, 2px, 9px);
-      border: 2px solid var(--textColor);
-      border-radius: 50px;
-      width: 50%;
-    }
-  }
-}
-
-.signInBtn {
-  padding: 4px 10px;
-  border: 2px solid var(--textColor);
-  border-radius: 4px;
-
-  .icon {
-    font-size: 2em;
-    margin-bottom: 10px;
   }
 }

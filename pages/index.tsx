@@ -1,6 +1,6 @@
-import Head from "next/head";
-import Image from "next/image";
+import Head from "../Components/Head";
 import styles from "../styles/Login.module.scss";
+import CommonStyles from "../styles/CommonLayout.module.scss";
 import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -17,17 +17,12 @@ export default function Home() {
   }, [session]);
 
   return (
-    <div className={styles.body}>
-      <Head>
-        <title>Login KShots</title>
-        <meta name="description" content="KShots - Save screenshots on the Go!" />
-        <link rel="icon" href="/favicon.ico" />
-        <link href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap" rel="stylesheet" />
-      </Head>
+    <div className={CommonStyles.body}>
+      <Head title="Login KShots"></Head>
 
-      <div className={styles.main}>
+      <div className={joinClasses(CommonStyles.main, styles.loginMain)}>
         <span>
-          <h1 className={styles.title}>
+          <h1 className="title">
             KSHOTS
             <span></span>
           </h1>

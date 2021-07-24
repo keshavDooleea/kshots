@@ -1,3 +1,5 @@
+@use "./Common.module.scss" as commonStyles;
+
 * {
   margin: 0;
   padding: 0;
@@ -5,15 +7,70 @@
   font-family: "Fjalla One", sans-serif;
 }
 
+:root {
+  --bg: #bbe6f3;
+  --main: white;
+  --textColor: #063064;
+  --mainHeight: 85vh;
+  --mainWidth: 85vw;
+
+  --radius: 8px;
+}
+
 a,
 button {
   cursor: pointer;
 }
 
-:root {
-  --bg: #bbe6f3;
-  --main: white;
-  --textColor: #063064;
+button {
+  padding: 4px 10px;
+  border: 2px solid #aeb8cc;
+  border-radius: 4px;
+  transition: 0.2s border-color;
 
-  --radius: 8px;
+  &:hover {
+    border-color: var(--textColor);
+  }
+}
+
+.title,
+.single-line-title {
+  color: var(--textColor);
+  @include commonStyles.flex(column, center, center);
+  position: relative;
+}
+
+.title {
+  span {
+    width: 100%;
+    border: 2px solid var(--textColor);
+    border-radius: 50px;
+    position: relative;
+  }
+}
+
+.title span,
+.single-line-title {
+  &::before {
+    content: "";
+    @include commonStyles.abs(auto, 50%, 0, auto, -5px, 9px);
+    border: 2px solid var(--textColor);
+    border-radius: 50px;
+    width: 20%;
+  }
+
+  &::after {
+    content: "";
+    @include commonStyles.abs(auto, 0, 0, auto, 2px, 9px);
+    border: 2px solid var(--textColor);
+    border-radius: 50px;
+    width: 50%;
+  }
+}
+
+.single-line-title::before {
+  transform: translate(-5px, 5px);
+}
+.single-line-title::after {
+  transform: translate(2px, 5px);
 }
