@@ -15,6 +15,15 @@
   border-radius: var(--radius);
   box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, 0.4);
   @include commonStyles.flex(column, center, space-evenly);
+
+  & > span {
+    position: relative;
+
+    & > small {
+      white-space: pre;
+      @include commonStyles.abs(auto, auto, -40px, 50%, -50%, 0);
+    }
+  }
 }
 
 .title {
@@ -46,5 +55,12 @@
 }
 
 .signInBtn {
-  padding: 4px;
+  padding: 4px 10px;
+  border: 2px solid var(--textColor);
+  border-radius: 4px;
+
+  .icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
 }

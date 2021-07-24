@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { signOut, useSession } from "next-auth/client";
-import useAuthRedirect from "../../hooks/authRedirect";
+import useAuthRedirect from "../../utils/hooks/authRedirect";
 
 export default function Dashboard() {
   const [session, setSession] = useSession();
