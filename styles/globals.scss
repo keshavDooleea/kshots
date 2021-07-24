@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Fjalla One", sans-serif;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+:root {
+  --bg: #bbe6f3;
+  --main: white;
+  --textColor: #063064;
+
+  --radius: 8px;
+}
