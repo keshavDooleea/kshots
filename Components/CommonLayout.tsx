@@ -27,6 +27,8 @@ const CommonLayout = ({ children, title }: ICommonProps) => {
     );
   };
 
+  const createFolder = async () => {};
+
   return (
     <div className={CommonStyles.body}>
       <Head title={title}></Head>
@@ -44,7 +46,7 @@ const CommonLayout = ({ children, title }: ICommonProps) => {
           )}
         </span>
         <span className={CommonStyles.navRight}>
-          <NavItem name="Create Folder" icon={faPlus} />
+          <NavItem name="Create Folder" icon={faPlus} onClick={createFolder} />
           <NavItem name="Sign Out" icon={faSignOutAlt} onClick={() => signOut({ callbackUrl: "/" })} />
         </span>
       </nav>
