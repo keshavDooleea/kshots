@@ -52,7 +52,6 @@ export default function Create() {
     if (folder) {
       setFolder({ ...folder, color: selectedColor } as IDBFolder);
     }
-    console.log("innn", selectedColor);
   }, [selectedColor, setSelectedColor]);
 
   const hasFolderBeenUpdated = (): boolean => {
@@ -88,13 +87,13 @@ export default function Create() {
     if (code === 200) router.push("/dashboard");
 
     if (code === 500) {
-      console.log(message);
+      setError(message);
     }
   };
 
   return (
     <>
-      <Dashboard title="Create Folder"></Dashboard>
+      <Dashboard title="Create Folder" shouldFetchFolder={false}></Dashboard>
       <Modal returnURL="/dashboard" shouldCloseModal={closeModal}>
         <>
           {folder && !error && (
@@ -124,6 +123,12 @@ export default function Create() {
                 </div>
               </div>
             </form>
+          )}
+
+          {error && (
+            <div className="topDiv center">
+              <h4>{error}</h4>
+            </div>
           )}
         </>
       </Modal>

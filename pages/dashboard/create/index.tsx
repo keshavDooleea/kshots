@@ -42,7 +42,7 @@ export default function Create() {
 
   return (
     <>
-      <Dashboard title="Create Folder"></Dashboard>
+      <Dashboard title="Create Folder" shouldFetchFolder={false}></Dashboard>
       <Modal returnURL="/dashboard" shouldCloseModal={closeModal}>
         <form className="modal-inner-main" onSubmit={saveFolder}>
           <h3>Create New Folder</h3>
