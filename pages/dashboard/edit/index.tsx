@@ -1,8 +1,5 @@
-import { useSession } from "next-auth/client";
-import useAuthRedirect from "../../../utils/hooks/authRedirect";
 import Dashboard from "..";
 import Modal from "../../../Components/Modal";
-import { COLORS } from "../../../utils/lib/config";
 import { FormEvent, useEffect, useState } from "react";
 
 import Folder from "../../../Components/Folder";
@@ -12,7 +9,7 @@ import { useRouter } from "next/router";
 import Colors from "../../../Components/Colors";
 
 export default function Create() {
-  const [selectedColor, setSelectedColor] = useState<string>(COLORS[0]);
+  const [selectedColor, setSelectedColor] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [closeModal, setCloseModal] = useState<boolean>(false);
 
@@ -55,6 +52,7 @@ export default function Create() {
     if (folder) {
       setFolder({ ...folder, color: selectedColor } as IDBFolder);
     }
+    console.log("innn", selectedColor);
   }, [selectedColor, setSelectedColor]);
 
   const hasFolderBeenUpdated = (): boolean => {
