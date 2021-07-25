@@ -1,17 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { FOLDERS_SCHEMA } from "../../../utils/lib/config";
-import { IFolder } from "../../../utils/lib/intefaces";
+import { IFolder, IResponse } from "../../../utils/lib/intefaces";
 import { getSession } from "next-auth/client";
 import { Session } from "next-auth";
 
 const db = require("../../../postgres");
 
-interface newSession extends Session {
+interface INewSession extends Session {
   userId: number;
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
-  const { userId } = (await getSession({ req })) as newSession;
+const handlePOST = async (req: NextApiRequest, res: NextApiResponse<any>, session: INewSession) => {
   const folder = req.body as IFolder;
 
   try {
@@ -19,12 +18,27 @@ export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
     // ...
 
     // save folder
-    console.log("saving new folder", folder.name, "for", userId);
+    console.log("saving new folder", folder.name, "for", session.user?.name || session.user?.email || session.userId);
     const saveQuery = `INSERT INTO ${FOLDERS_SCHEMA} (userId, name, color, createdAt) VALUES ($1, $2, $3, $4)`;
-    await db.query(saveQuery, [userId, folder.name, folder.color, new Date()]);
+    await db.query(saveQuery, [session.userId, folder.name, folder.color, new Date()]);
+
+    const response: IResponse = {
+      code: 200,
+      message: "Saved folder successfully",
+    };
+
+    res.json(response);
   } catch (err) {
     console.log("saving folder error", err);
   }
+};
 
-  console.log(folder, userId);
+export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
+  const session = (await getSession({ req })) as INewSession;
+
+  switch (req.method) {
+    case "POST":
+      handlePOST(req, res, session);
+      break;
+  }
 };

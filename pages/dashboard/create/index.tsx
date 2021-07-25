@@ -9,11 +9,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Folder from "../../../Components/Folder";
 import { POST } from "../../../utils/lib/http";
 import { IFolder } from "../../../utils/lib/intefaces";
+import { useRouter } from "next/router";
 
 export default function Create() {
   const [selectedColor, setSelectedColor] = useState<string>(COLORS[0]);
   const [folderName, setFolderName] = useState<string>("");
   const [closeModal, setCloseModal] = useState<boolean>(false);
+  const router = useRouter();
 
   //   useAuthRedirect();
 
@@ -27,7 +29,12 @@ export default function Create() {
       color: selectedColor,
     };
 
-    const { status } = await POST("folder", folder);
+    const { code, message } = await POST("folder", folder);
+    if (code === 200) router.push("/dashboard");
+
+    if (code === 500) {
+      console.log(message);
+    }
   };
 
   return (
