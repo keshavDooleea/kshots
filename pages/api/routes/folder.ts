@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { FOLDERS_SCHEMA } from "../../../utils/lib/config";
-import { IFolder, IResponse } from "../../../utils/lib/intefaces";
+import { IDBFolder, IFolder, IResponse } from "../../../utils/lib/intefaces";
 import { getSession } from "next-auth/client";
 import { Session } from "next-auth";
 
@@ -22,7 +22,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse<any>, sessio
     const saveQuery = `INSERT INTO ${FOLDERS_SCHEMA} (userId, name, color, createdAt) VALUES ($1, $2, $3, $4)`;
     await db.query(saveQuery, [session.userId, folder.name, folder.color, new Date()]);
 
-    const response: IResponse = {
+    const response: IResponse<null> = {
       code: 200,
       message: "Saved folder successfully",
     };
@@ -30,6 +30,38 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse<any>, sessio
     res.json(response);
   } catch (err) {
     console.log("saving folder error", err);
+    const response: IResponse<null> = {
+      code: 500,
+      message: "Error saving folder",
+    };
+    res.json(response);
+  }
+};
+
+const handleGET = async (req: NextApiRequest, res: NextApiResponse<any>, session: INewSession) => {
+  try {
+    // check if folder already exists
+    // ...
+
+    // save folder
+    console.log("Getting all folders for", session.user?.name || session.user?.email || session.userId);
+    const getQuery = `SELECT * FROM ${FOLDERS_SCHEMA} WHERE userId = $1;`;
+    let { rows } = await db.query(getQuery, [session.userId]);
+
+    const response: IResponse<IDBFolder[]> = {
+      code: 200,
+      message: "Got all folders",
+      data: rows,
+    };
+
+    res.json(response);
+  } catch (err) {
+    console.log("Getting all folders error", err);
+    const response: IResponse<null> = {
+      code: 500,
+      message: "Error getting all folders",
+    };
+    res.json(response);
   }
 };
 
@@ -39,6 +71,9 @@ export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
   switch (req.method) {
     case "POST":
       handlePOST(req, res, session);
+      break;
+    case "GET":
+      handleGET(req, res, session);
       break;
   }
 };

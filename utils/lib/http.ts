@@ -10,12 +10,12 @@ export const POST = async (endpoint: string, data: any) => {
     },
   });
 
-  return (await res.json()) as IResponse;
+  return (await res.json()) as IResponse<null>;
 };
 
-export const GET = async (endpoint: string) => {
+export const GET = async <T>(endpoint: string) => {
   const res = await fetch(`${serverURL}/${endpoint}`);
-  return (await res.json()) as IResponse;
+  return (await res.json()) as IResponse<T>;
 };
 
 export const DELETE = async (endpoint: string) => {
@@ -25,7 +25,7 @@ export const DELETE = async (endpoint: string) => {
       "content-type": "application/json",
     },
   });
-  return (await res.json()) as IResponse;
+  return (await res.json()) as IResponse<null>;
 };
 
 export const PUT = async (endpoint: string, data: any) => {
@@ -37,5 +37,5 @@ export const PUT = async (endpoint: string, data: any) => {
     },
   });
 
-  return (await res.json()) as IResponse;
+  return (await res.json()) as IResponse<null>;
 };

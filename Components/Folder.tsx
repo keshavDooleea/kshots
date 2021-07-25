@@ -1,14 +1,16 @@
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { joinClasses } from "../utils/lib/joinClasses";
 
 interface IFolderProps {
   color: string;
+  ccsClass?: string;
 }
 
-const Folder = ({ color }: IFolderProps) => {
+const Folder = ({ color, ccsClass }: IFolderProps) => {
   return (
     <>
-      <FontAwesomeIcon className="folder-icon" style={{ color }} icon={faFolder} />
+      <FontAwesomeIcon className={joinClasses("folder-icon", ccsClass as string)} style={{ color }} icon={faFolder} />
     </>
   );
 };
