@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/client";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import CommonLayout from "../../Components/CommonLayout";
 import styles from "../../styles/Dashboard.module.scss";
 import Folder from "../../Components/Folder";
@@ -35,23 +35,37 @@ function Dashboard({ title, shouldFetchFolder }: IDashboardProps) {
     }
   }, []);
 
-  const editFolder = async (id: number) =>
+  const onFolderClicked = async (event: MouseEvent<HTMLDivElement>, id: number) => {
+    const classList = (event.target as HTMLDivElement).classList;
+
+    if (classList.contains("folder-edit-icon")) {
+      router.push({
+        pathname: "/dashboard/edit",
+        query: { id },
+      });
+
+      return;
+    }
+
     router.push({
-      pathname: "/dashboard/edit",
-      query: { id },
+      pathname: "/dashboard/create",
+      // query: { id },
     });
+  };
 
   return (
     <CommonLayout title={tabTitle}>
       <div className={joinClasses("topDiv", styles.main)}>
         {folders?.map((folder, index) => (
-          <div key={index} className={styles.folderMain}>
+          <div key={index} className={styles.folderMain} onClick={(event) => onFolderClicked(event, folder.id)}>
             <Folder color={folder.color} ccsClass={styles.icon}>
               <span>
                 <h4>{folder.name}</h4>
                 <small>Created on {folder.createdat}</small>
               </span>
-              <FontAwesomeIcon className="folder-edit-icon" icon={faPenSquare} onClick={() => editFolder(folder.id)} />
+              <div className="folder-edit-icon">
+                <FontAwesomeIcon className="icon" icon={faPenSquare} />
+              </div>
             </Folder>
           </div>
         ))}

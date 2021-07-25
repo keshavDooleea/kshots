@@ -232,16 +232,26 @@ input[type="text"] {
 
 .folder-main {
   .folder-edit-icon {
+    --iconHeight: 1.3rem;
+
     @include commonStyles.abs(0, 0, auto, auto, 0, 0);
     opacity: 0;
     font-size: 1.3em;
     transition: 0.2s opacity;
     cursor: pointer;
+    width: 1.3rem;
+    height: 1.3rem;
+    z-index: 20;
+    @include commonStyles.flexCenter();
 
-    path {
-      stroke: white;
-      stroke-width: 15px;
+    .icon {
+      pointer-events: none;
     }
+
+    // path {
+    //   // stroke: white;
+    //   // stroke-width: 15px;
+    // }
   }
 
   &:hover .folder-edit-icon {
