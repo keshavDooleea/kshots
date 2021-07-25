@@ -8,7 +8,7 @@ import { IDBFolder } from "../../../utils/lib/intefaces";
 import { useRouter } from "next/router";
 import Colors from "../../../Components/Colors";
 
-export default function Create() {
+export default function Edit() {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [closeModal, setCloseModal] = useState<boolean>(false);
