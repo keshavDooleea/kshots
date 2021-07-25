@@ -10,7 +10,7 @@ export default function Create() {
 
   return (
     <>
-      <Dashboard></Dashboard>
+      <Dashboard title="Create Folder"></Dashboard>
       <Modal returnURL="/dashboard">
         <p>helloooooooo</p>
       </Modal>

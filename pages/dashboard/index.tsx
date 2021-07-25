@@ -3,10 +3,14 @@ import { getSession, signOut, useSession } from "next-auth/client";
 import useAuthRedirect from "../../utils/hooks/authRedirect";
 import CommonLayout from "../../Components/CommonLayout";
 
-export default function Dashboard() {
-  const [session, setSession] = useSession();
+interface IDashboardProps {
+  title: string;
+}
 
+export default function Dashboard({ title }: IDashboardProps) {
+  const [session, setSession] = useSession();
+  const tabTitle = title || "Dashboard";
   // useAuthRedirect();
 
-  return <CommonLayout title="Dashboard">helooooo</CommonLayout>;
+  return <CommonLayout title={tabTitle}>helooooo</CommonLayout>;
 }
