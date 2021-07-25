@@ -6,6 +6,8 @@ import Folder from "../../Components/Folder";
 import { GET } from "../../utils/lib/http";
 import { IDBFolder } from "../../utils/lib/intefaces";
 import { joinClasses } from "../../utils/lib/joinClasses";
+import { faPenSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface IDashboardProps {
   title: string;
@@ -34,13 +36,13 @@ function Dashboard({ title }: IDashboardProps) {
       <div className={joinClasses("topDiv", styles.main)}>
         {folders?.map((folder, index) => (
           <div key={index} className={styles.folderMain}>
-            <span className={styles.folderSurrounding}>
-              <Folder color={folder.color} ccsClass={styles.icon}></Folder>
-              <div className={styles.folderInfo}>
+            <Folder color={folder.color} ccsClass={styles.icon}>
+              <span>
                 <h4>{folder.name}</h4>
                 <small>Created on {folder.createdat}</small>
-              </div>
-            </span>
+              </span>
+              <FontAwesomeIcon className="folder-edit-icon" icon={faPenSquare} />
+            </Folder>
           </div>
         ))}
       </div>

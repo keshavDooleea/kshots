@@ -144,12 +144,77 @@ input[type="text"] {
           @include commonStyles.flex(column, center, center);
 
           input {
-            padding: 6px 10px;
-            width: 30%;
+            padding: 10px;
+            width: 100%;
+          }
+
+          .folder-lock {
+            margin-top: 15px;
+            @include commonStyles.flex(row, center, space-between);
+
+            & > div {
+              width: 70px;
+              margin-left: 10px;
+              position: relative;
+
+              input[type="checkbox"] {
+                position: relative;
+                cursor: pointer;
+
+                --inputHeight: 23px;
+
+                &:not(:checked) + label::after {
+                  content: attr(data-unchecked);
+                }
+
+                &:checked + label::before {
+                  content: attr(data-checked);
+                }
+
+                &:checked + label::before,
+                &:not(:checked) + label::after {
+                  font-size: 0.8em;
+                  pointer-events: none;
+                  @include commonStyles.abs(50%, auto, auto, 50%, -50%, -50%);
+                }
+
+                &::before {
+                  content: "";
+                  @include commonStyles.abs(50%, auto, auto, 0, 0, -50%);
+                  width: 100%;
+                  height: var(--inputHeight);
+                  background-color: white;
+                  border: 1px solid #aeb8cc;
+                  border-radius: 25px;
+                  transition: background-color 0.25s;
+                }
+
+                &:checked::before {
+                  background-color: #aeb8cc;
+                }
+
+                &::after {
+                  content: "";
+                  @include commonStyles.abs(50%, auto, auto, 0, 0, -50%);
+                  width: var(--inputHeight);
+                  height: var(--inputHeight);
+                  border-radius: 50%;
+                  transition: left 0.25s, background-color 0.25s;
+                  border: 1px solid #aeb8cc;
+                  transform: translateY(-50%) scale(0.9);
+                  background-color: #aeb8cc;
+                }
+
+                &:checked::after {
+                  background-color: white;
+                  left: calc(100% - var(--inputHeight));
+                }
+              }
+            }
           }
 
           .folder-icon {
-            font-size: 14em !important;
+            font-size: 18em !important;
           }
         }
 
@@ -163,6 +228,25 @@ input[type="text"] {
 
 .folder-icon {
   filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+}
+
+.folder-main {
+  .folder-edit-icon {
+    @include commonStyles.abs(0, 0, auto, auto, 0, 0);
+    opacity: 0;
+    font-size: 1.3em;
+    transition: 0.2s opacity;
+    cursor: pointer;
+
+    path {
+      stroke: white;
+      stroke-width: 15px;
+    }
+  }
+
+  &:hover .folder-edit-icon {
+    opacity: 1;
+  }
 }
 
 .topDiv {

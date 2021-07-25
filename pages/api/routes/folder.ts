@@ -19,8 +19,8 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse<any>, sessio
 
     // save folder
     console.log("saving new folder", folder.name, "for", session.user?.name || session.user?.email || session.userId);
-    const saveQuery = `INSERT INTO ${FOLDERS_SCHEMA} (userId, name, color, createdAt) VALUES ($1, $2, $3, $4)`;
-    await db.query(saveQuery, [session.userId, folder.name, folder.color, new Date()]);
+    const saveQuery = `INSERT INTO ${FOLDERS_SCHEMA} (userId, name, color, isLock, createdAt) VALUES ($1, $2, $3, $4, $5)`;
+    await db.query(saveQuery, [session.userId, folder.name, folder.color, folder.isLock, new Date()]);
 
     const response: IResponse<null> = {
       code: 200,

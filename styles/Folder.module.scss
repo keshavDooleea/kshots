@@ -1,0 +1,20 @@
+@use "./Common.module.scss" as commonStyles;
+
+.folderSurrounding {
+  position: relative;
+
+  .folderInfo {
+    width: 90%;
+    // pointer-events: none;
+    @include commonStyles.abs(50%, auto, auto, 50%, -50%, -50%);
+  }
+
+  .icon {
+    font-size: 12rem;
+    cursor: pointer;
+
+    //   &:hover {
+    //     // filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.9));
+    //   }
+  }
+}

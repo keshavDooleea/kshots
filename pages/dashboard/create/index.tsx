@@ -15,6 +15,7 @@ export default function Create() {
   const [selectedColor, setSelectedColor] = useState<string>(COLORS[0]);
   const [folderName, setFolderName] = useState<string>("");
   const [closeModal, setCloseModal] = useState<boolean>(false);
+  const [isLock, setIsLock] = useState<boolean>(false);
   const router = useRouter();
 
   //   useAuthRedirect();
@@ -27,6 +28,7 @@ export default function Create() {
     const folder: IFolder = {
       name: folderName,
       color: selectedColor,
+      isLock,
     };
 
     const { code, message } = await POST("folder", folder);
@@ -53,8 +55,16 @@ export default function Create() {
               ))}
             </div>
             <main>
-              <input type="text" maxLength={20} onChange={(e) => setFolderName(e.target.value)} placeholder="Name Your Folder" spellCheck="false" />
-              <Folder color={selectedColor}></Folder>
+              <Folder color={selectedColor}>
+                <input type="text" maxLength={20} onChange={(e) => setFolderName(e.target.value)} placeholder="Name Your Folder" spellCheck="false" />
+                <div className="folder-lock">
+                  <p>Lock Folder</p>
+                  <div>
+                    <input type="checkbox" id="lockFolderCheckbox" onChange={() => setIsLock(!isLock)} />
+                    <label htmlFor="lockFolderCheckbox" id="lockFolderLabel" data-checked="Yes" data-unchecked="No" data-color={selectedColor}></label>
+                  </div>
+                </div>
+              </Folder>
             </main>
             <div className="actions">
               <button type="button" onClick={() => setCloseModal(true)}>

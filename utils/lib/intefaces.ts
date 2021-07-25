@@ -1,6 +1,7 @@
 export interface IFolder {
   name: string;
   color: string;
+  isLock: boolean;
 }
 
 export interface IDBFolder {
@@ -9,6 +10,7 @@ export interface IDBFolder {
   createdat: Date;
   name: string;
   color: string;
+  isLock: boolean;
 }
 
 type CODE = 200 | 500;
