@@ -3,6 +3,7 @@ import { signOut, useSession } from "next-auth/client";
 import Head from "../Components/Head";
 import { faSignOutAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 
 interface ICommonProps {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ interface INavItem {
 
 const CommonLayout = ({ children, title }: ICommonProps) => {
   const [session, setSession] = useSession();
+  const router = useRouter();
 
   const NavItem = ({ name, icon, onClick }: INavItem) => {
     return (
@@ -27,7 +29,7 @@ const CommonLayout = ({ children, title }: ICommonProps) => {
     );
   };
 
-  const createFolder = async () => {};
+  const createFolder = async () => router.push("/dashboard/create");
 
   return (
     <div className={CommonStyles.body}>
@@ -46,7 +48,7 @@ const CommonLayout = ({ children, title }: ICommonProps) => {
           )}
         </span>
         <span className={CommonStyles.navRight}>
-          <NavItem name="Create Folder" icon={faPlus} onClick={createFolder} />
+          {router.pathname === "/dashboard" && <NavItem name="Create Folder" icon={faPlus} onClick={createFolder} />}
           <NavItem name="Sign Out" icon={faSignOutAlt} onClick={() => signOut({ callbackUrl: "/" })} />
         </span>
       </nav>

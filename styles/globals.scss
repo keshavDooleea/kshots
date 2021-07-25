@@ -74,3 +74,18 @@ button {
 .single-line-title::after {
   transform: translate(2px, 5px);
 }
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  @include commonStyles.absCenter();
+  @include commonStyles.flexCenter();
+
+  .modal-main {
+    width: 70%;
+    height: 70%;
+    background-color: white;
+    border-radius: var(--radius);
+  }
+}

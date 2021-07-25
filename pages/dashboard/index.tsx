@@ -6,7 +6,7 @@ import CommonLayout from "../../Components/CommonLayout";
 export default function Dashboard() {
   const [session, setSession] = useSession();
 
-  useAuthRedirect();
+  // useAuthRedirect();
 
   return <CommonLayout title="Dashboard">helooooo</CommonLayout>;
 }
