@@ -1,14 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { FOLDERS_SCHEMA } from "../../../utils/lib/config";
-import { IDBFolder, IFolder, IResponse } from "../../../utils/lib/intefaces";
+import { FOLDERS_SCHEMA } from "../../../../utils/lib/config";
+import { IDBFolder, IFolder, INewSession, IResponse } from "../../../../utils/lib/intefaces";
 import { getSession } from "next-auth/client";
-import { Session } from "next-auth";
 
-const db = require("../../../postgres");
+const db = require("../../../../postgres");
 
-interface INewSession extends Session {
-  userId: number;
-}
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+};
 
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse<any>, session: INewSession) => {
   const folder = req.body as IFolder;
@@ -20,7 +21,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse<any>, sessio
     // save folder
     console.log("saving new folder", folder.name, "for", session.user?.name || session.user?.email || session.userId);
     const saveQuery = `INSERT INTO ${FOLDERS_SCHEMA} (userId, name, color, isLock, createdAt) VALUES ($1, $2, $3, $4, $5)`;
-    await db.query(saveQuery, [session.userId, folder.name, folder.color, folder.isLock, new Date()]);
+    await db.query(saveQuery, [session.userId, folder.name, folder.color, folder.islock, new Date()]);
 
     const response: IResponse<null> = {
       code: 200,
@@ -55,6 +56,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse<any>, session
     };
 
     res.json(response);
+    res.end();
   } catch (err) {
     console.log("Getting all folders error", err);
     const response: IResponse<null> = {

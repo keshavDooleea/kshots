@@ -10,6 +10,7 @@ import Folder from "../../../Components/Folder";
 import { POST } from "../../../utils/lib/http";
 import { IFolder } from "../../../utils/lib/intefaces";
 import { useRouter } from "next/router";
+import Colors from "../../../Components/Colors";
 
 export default function Create() {
   const [selectedColor, setSelectedColor] = useState<string>(COLORS[0]);
@@ -28,7 +29,7 @@ export default function Create() {
     const folder: IFolder = {
       name: folderName,
       color: selectedColor,
-      isLock,
+      islock: isLock,
     };
 
     const { code, message } = await POST("folder", folder);
@@ -46,14 +47,7 @@ export default function Create() {
         <form className="modal-inner-main" onSubmit={saveFolder}>
           <h3>Create New Folder</h3>
           <div className="create-modal-container">
-            <div className="color-container">
-              {COLORS.map((color, index) => (
-                <div key={index} style={{ backgroundColor: color }} className="color-main" onClick={() => setSelectedColor(color)}>
-                  {selectedColor === color && <FontAwesomeIcon icon={faCheck} className="color-check" />}
-                  {selectedColor === color && <div className="color-selected" style={{ borderColor: color }} />}
-                </div>
-              ))}
-            </div>
+            <Colors selectedColor={selectedColor} setSelectedColor={setSelectedColor} />
             <main>
               <Folder color={selectedColor}>
                 <input type="text" maxLength={20} onChange={(e) => setFolderName(e.target.value)} placeholder="Name Your Folder" spellCheck="false" />

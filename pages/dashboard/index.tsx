@@ -8,6 +8,7 @@ import { IDBFolder } from "../../utils/lib/intefaces";
 import { joinClasses } from "../../utils/lib/joinClasses";
 import { faPenSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 
 interface IDashboardProps {
   title: string;
@@ -17,6 +18,7 @@ function Dashboard({ title }: IDashboardProps) {
   const [session, setSession] = useSession();
   const [folders, setFolders] = useState<IDBFolder[]>();
   const tabTitle = title || "Dashboard";
+  const router = useRouter();
   // useAuthRedirect();
 
   // Todo: change to getInitialProps
@@ -26,10 +28,14 @@ function Dashboard({ title }: IDashboardProps) {
       setFolders(foldersResponse.data);
     };
 
-    console.log(folders);
-
     getFolders();
   }, []);
+
+  const editFolder = async (id: number) =>
+    router.push({
+      pathname: "/dashboard/edit",
+      query: { id },
+    });
 
   return (
     <CommonLayout title={tabTitle}>
@@ -41,7 +47,7 @@ function Dashboard({ title }: IDashboardProps) {
                 <h4>{folder.name}</h4>
                 <small>Created on {folder.createdat}</small>
               </span>
-              <FontAwesomeIcon className="folder-edit-icon" icon={faPenSquare} />
+              <FontAwesomeIcon className="folder-edit-icon" icon={faPenSquare} onClick={() => editFolder(folder.id)} />
             </Folder>
           </div>
         ))}

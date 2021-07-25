@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 interface IModal {
   returnURL: string;
   shouldCloseModal: boolean;
-  //   setOpenModal: Dispatch<SetStateAction<boolean>>;
   children: JSX.Element;
 }
 
