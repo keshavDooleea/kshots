@@ -6,3 +6,4 @@ export const COLORS = ["rosybrown", "#fbae3c", "#a5a58d", "#669bbc", "#177e89"];
 
 // POSTGRESS
 export const USERS_SCHEMA = "kshots.Users";
+export const FOLDERS_SCHEMA = "kshots.Folders";

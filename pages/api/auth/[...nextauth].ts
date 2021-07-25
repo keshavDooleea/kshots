@@ -38,6 +38,10 @@ const options: NextAuthOptions = {
 
       return true;
     },
+    session: async (session, user) => {
+      session.userId = user.sub || user.id;
+      return session;
+    },
   },
 };
 

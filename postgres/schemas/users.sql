@@ -8,7 +8,18 @@ CREATE TABLE IF NOT EXISTS Users (
 	email	  VARCHAR(255),
     name 	  VARCHAR(255),
 	createdAt DATE 		   NOT NULL,
+	
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS Folders (
+    id 		  INTEGER 	   NOT NULL UNIQUE,
+	userId    INTEGER	   NOT NULL,	
+	name	  VARCHAR(255) NOT NULL,
+	color	  VARCHAR(255) NOT NULL,
+	createdAt DATE 		   NOT NULL,
+	
+	PRIMARY KEY (id),
+	FOREIGN KEY (userId)   REFERENCES Users(id)
+);
 

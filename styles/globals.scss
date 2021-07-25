@@ -22,6 +22,10 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  pointer-events: none;
+}
+
 button,
 input[type="text"] {
   padding: 4px 10px;
