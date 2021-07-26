@@ -266,6 +266,15 @@ input[type="text"] {
   border-radius: var(--radius);
 }
 
+.error-container {
+  position: relative;
+  @include commonStyles.flexCenter();
+
+  button {
+    @include commonStyles.abs(auto, auto, 10%, 50%, -50%, 0);
+  }
+}
+
 .center {
   @include commonStyles.flexCenter();
 }

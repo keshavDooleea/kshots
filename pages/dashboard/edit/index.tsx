@@ -7,6 +7,7 @@ import { GET, PUT } from "../../../utils/lib/http";
 import { IDBFolder } from "../../../utils/lib/intefaces";
 import { useRouter } from "next/router";
 import Colors from "../../../Components/Colors";
+import Error from "../../../Components/Error";
 
 export default function Edit() {
   const [selectedColor, setSelectedColor] = useState<string>("");
@@ -25,6 +26,11 @@ export default function Edit() {
     const { id } = router.query;
 
     const fetchFolder = async () => {
+      if (!(id as string).match(/^[0-9]+$/)) {
+        setError("Sorry, id parameter can only be an integer!");
+        return;
+      }
+
       const response = await GET(`folder/${id}`);
 
       if (response.code === 404) {
@@ -125,11 +131,7 @@ export default function Edit() {
             </form>
           )}
 
-          {error && (
-            <div className="topDiv center">
-              <h4>{error}</h4>
-            </div>
-          )}
+          {error && <Error message={error} returnURL="/dashboard" />}
         </>
       </Modal>
     </>
