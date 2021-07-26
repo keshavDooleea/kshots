@@ -23,3 +23,16 @@ CREATE TABLE IF NOT EXISTS Folders (
 	FOREIGN KEY (userId)   REFERENCES Users(id)
 );
 
+CREATE TABLE IF NOT EXISTS Images (
+	id 		  		SERIAL 	   		NOT NULL UNIQUE,
+	userid	  		INTEGER	   		NOT NULL,
+	folderid  		INTEGER	   		NOT NULL,
+	src		  		BYTEA		   	NOT NULL,
+	createdAt 		DATE 		   	NOT NULL,
+	title	  		VARCHAR(255),
+	description		TEXT,
+	
+	PRIMARY KEY (id),
+	FOREIGN KEY (userId)  	 REFERENCES Users(id),
+	FOREIGN KEY (folderid)   REFERENCES Folders(id)
+)
