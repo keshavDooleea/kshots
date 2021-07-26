@@ -17,6 +17,16 @@ export interface IDBFolder {
   islock: boolean;
 }
 
+export interface IDBImage {
+  id: number;
+  userid: number;
+  folderid: number;
+  src: string;
+  createdat: Date;
+  title: string;
+  description: string;
+}
+
 /**
  * 200: SUCCESS
  * 404: NOT FOUND

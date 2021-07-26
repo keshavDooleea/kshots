@@ -27,7 +27,7 @@ const FolderId = () => {
   }, [router.isReady]);
 
   return (
-    <CommonLayout title={"efe"}>
+    <CommonLayout title={"Folder Dashboard"}>
       <div className={joinClasses("topDiv")}>{error && <Error message={error} returnURL="/dashboard" />}</div>
     </CommonLayout>
   );

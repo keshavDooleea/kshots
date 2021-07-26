@@ -27,7 +27,8 @@ button:disabled {
 }
 
 button,
-input[type="text"] {
+input[type="text"],
+textarea {
   padding: 4px 10px;
   border: 2px solid #aeb8cc;
   border-radius: 4px;
@@ -217,13 +218,58 @@ input[type="text"] {
             font-size: 18em !important;
           }
         }
+      }
 
-        .actions {
-          @include commonStyles.flex(row, center, space-evenly);
+      .upload-image-modal-container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 85% 15%;
+
+        .image-container {
+          @include commonStyles.flexCenter();
+
+          img {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: var(--radius);
+            box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+          }
+        }
+
+        main {
+          @include commonStyles.flex(column, center, center);
+
+          div {
+            width: 90%;
+            @include commonStyles.flex(column, flex-start, center);
+            margin-bottom: 30px;
+
+            label {
+              margin-bottom: 5px;
+            }
+
+            input,
+            textarea {
+              width: 100%;
+            }
+
+            textarea {
+              height: 20vh;
+              resize: none;
+            }
+          }
+        }
+
+        .modal-actions {
+          grid-column: 1 / span 2;
         }
       }
     }
   }
+}
+
+.modal-actions {
+  @include commonStyles.flex(row, center, space-evenly);
 }
 
 .folder-icon {
