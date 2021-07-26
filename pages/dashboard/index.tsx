@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/client";
 import { MouseEvent, useEffect, useState } from "react";
 import CommonLayout from "../../Components/CommonLayout";
 import styles from "../../styles/Dashboard.module.scss";
@@ -16,7 +15,6 @@ interface IDashboardProps {
 }
 
 function Dashboard({ title, shouldFetchFolder }: IDashboardProps) {
-  const [session, setSession] = useSession();
   const [folders, setFolders] = useState<IDBFolder[]>();
   const tabTitle = title || "Dashboard";
   const shouldFetch = shouldFetchFolder ?? true;

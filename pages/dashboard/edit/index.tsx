@@ -8,6 +8,7 @@ import { IDBFolder } from "../../../utils/lib/intefaces";
 import { useRouter } from "next/router";
 import Colors from "../../../Components/Colors";
 import Error from "../../../Components/Error";
+import { isOnlyNumber } from "../../../utils/lib/config";
 
 export default function Edit() {
   const [selectedColor, setSelectedColor] = useState<string>("");
@@ -26,7 +27,7 @@ export default function Edit() {
     const { id } = router.query;
 
     const fetchFolder = async () => {
-      if (!(id as string).match(/^[0-9]+$/)) {
+      if (isOnlyNumber(id as string)) {
         setError("Sorry, id parameter can only be an integer!");
         return;
       }
