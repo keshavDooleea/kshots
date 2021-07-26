@@ -56,7 +56,6 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse<any>, session
     };
 
     res.json(response);
-    res.end();
   } catch (err) {
     console.log("Getting all folders error", err);
     const response: IResponse<null> = {
