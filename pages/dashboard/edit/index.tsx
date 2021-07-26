@@ -1,7 +1,5 @@
-import Dashboard from "..";
 import Modal from "../../../Components/Modal";
 import { FormEvent, useEffect, useState } from "react";
-
 import Folder from "../../../Components/Folder";
 import { GET, PUT } from "../../../utils/lib/http";
 import { IDBFolder } from "../../../utils/lib/intefaces";
@@ -9,6 +7,7 @@ import { useRouter } from "next/router";
 import Colors from "../../../Components/Colors";
 import Error from "../../../Components/Error";
 import { isOnlyNumber } from "../../../utils/lib/config";
+import Template from "../../../Components/Template";
 
 export default function Edit() {
   const [selectedColor, setSelectedColor] = useState<string>("");
@@ -100,7 +99,7 @@ export default function Edit() {
 
   return (
     <>
-      <Dashboard title="Create Folder" shouldFetchFolder={false}></Dashboard>
+      <Template title="Edit Folder" />
       <Modal returnURL="/dashboard" shouldCloseModal={closeModal}>
         <>
           {folder && !error && (

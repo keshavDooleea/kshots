@@ -1,16 +1,12 @@
-import { useSession } from "next-auth/client";
-import useAuthRedirect from "../../../utils/hooks/authRedirect";
-import Dashboard from "..";
 import Modal from "../../../Components/Modal";
 import { COLORS } from "../../../utils/lib/config";
 import { FormEvent, useState } from "react";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Folder from "../../../Components/Folder";
 import { POST } from "../../../utils/lib/http";
 import { IFolder } from "../../../utils/lib/intefaces";
 import { useRouter } from "next/router";
 import Colors from "../../../Components/Colors";
+import Template from "../../../Components/Template";
 
 export default function Create() {
   const [selectedColor, setSelectedColor] = useState<string>(COLORS[0]);
@@ -42,7 +38,7 @@ export default function Create() {
 
   return (
     <>
-      <Dashboard title="Create Folder" shouldFetchFolder={false}></Dashboard>
+      <Template title="Create Folder" />
       <Modal returnURL="/dashboard" shouldCloseModal={closeModal}>
         <form className="modal-inner-main" onSubmit={saveFolder}>
           <h3>Create New Folder</h3>

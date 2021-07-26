@@ -11,13 +11,11 @@ import { useRouter } from "next/router";
 
 interface IDashboardProps {
   title: string;
-  shouldFetchFolder: boolean;
 }
 
-function Dashboard({ title, shouldFetchFolder }: IDashboardProps) {
+function Dashboard({ title }: IDashboardProps) {
   const [folders, setFolders] = useState<IDBFolder[]>();
   const tabTitle = title || "Dashboard";
-  const shouldFetch = shouldFetchFolder ?? true;
   const router = useRouter();
   // useAuthRedirect();
 
@@ -28,9 +26,7 @@ function Dashboard({ title, shouldFetchFolder }: IDashboardProps) {
       setFolders(foldersResponse.data);
     };
 
-    if (shouldFetch) {
-      getFolders();
-    }
+    getFolders();
   }, []);
 
   const onFolderClicked = async (event: MouseEvent<HTMLDivElement>, id: number) => {
