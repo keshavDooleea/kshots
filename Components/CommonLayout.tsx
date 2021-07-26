@@ -31,6 +31,10 @@ const CommonLayout = ({ children, title }: ICommonProps) => {
 
   const createFolder = async () => router.push("/dashboard/create");
 
+  const uploadImg = async () => {
+    router.push(`/folder/${router.query.id}/upload`);
+  };
+
   return (
     <div className={CommonStyles.body}>
       <Head title={title}></Head>
@@ -48,6 +52,7 @@ const CommonLayout = ({ children, title }: ICommonProps) => {
           )}
         </span>
         <span className={CommonStyles.navRight}>
+          {router.pathname === "/folder/[id]" && <NavItem name="Upload Image" icon={faPlus} onClick={uploadImg} />}
           {router.pathname === "/dashboard" && <NavItem name="Create Folder" icon={faPlus} onClick={createFolder} />}
           <NavItem name="Sign Out" icon={faSignOutAlt} onClick={() => signOut({ callbackUrl: "/" })} />
         </span>
