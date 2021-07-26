@@ -48,8 +48,8 @@ function Dashboard({ title, shouldFetchFolder }: IDashboardProps) {
     }
 
     router.push({
-      pathname: "/dashboard/create",
-      // query: { id },
+      pathname: "/folder/[id]",
+      query: { id },
     });
   };
 
