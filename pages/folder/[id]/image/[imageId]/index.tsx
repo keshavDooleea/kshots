@@ -70,7 +70,14 @@ const ImageId = () => {
                 <ImageItem itemName="Description" property={image?.description as string} />
               </div>
             )}
-            <div className={styles.right}>{image && <img src={getDecodedBase64(image.src)} alt="Individual screenshot Image" />}</div>
+            <div className={styles.right}>
+              {image && (
+                <>
+                  <img src={getDecodedBase64(image.src)} alt="Individual screenshot Image" />
+                  <h4>{getDate(image?.createdat as Date)}</h4>
+                </>
+              )}
+            </div>
           </div>
         </>
       )}

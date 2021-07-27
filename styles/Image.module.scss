@@ -30,11 +30,22 @@
     height: 100%;
     margin-left: 15px;
     @include commonStyles.flexCenter();
+    position: relative;
 
     img {
       max-width: 100%;
       max-height: 100%;
       border-radius: var(--radius);
+      box-shadow: 0 0 10px 0.2px rgb(0 0 0 / 40%);
+    }
+
+    img + h4 {
+      @include commonStyles.abs(8px, auto, auto, 50%, -50%, 0);
+      text-shadow: rgb(0 0 0 / 50%) 0 10px 10px;
+      background-color: white;
+      padding: 5px 8px;
+      border-radius: var(--radius);
+      color: var(--textColor);
       box-shadow: 0 0 10px 0.2px rgb(0 0 0 / 40%);
     }
   }
