@@ -10,20 +10,23 @@ import { isOnlyNumber } from "../../../utils/lib/config";
 import Template from "../../../Components/Template";
 
 export default function Edit() {
+  const router = useRouter();
+
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [returnURL, setReturnURL] = useState<string>("");
   const [closeModal, setCloseModal] = useState<boolean>(false);
 
   const [initialFolder, setInitialFolder] = useState<IDBFolder>();
   const [folder, setFolder] = useState<IDBFolder>();
 
-  const router = useRouter();
-
   //   useAuthRedirect();
 
   useEffect(() => {
     if (!router.isReady) return;
+
     const { id } = router.query;
+    setReturnURL((router.query.returnUrl as string) ?? "/dashboard");
 
     const fetchFolder = async () => {
       if (isOnlyNumber(id as string)) {
@@ -90,7 +93,7 @@ export default function Edit() {
 
     const { code, message } = await PUT(`folder/${updatedFolder.id}`, updatedFolder);
 
-    if (code === 200) router.push("/dashboard");
+    if (code === 200) router.push(returnURL);
 
     if (code === 500) {
       setError(message);
@@ -100,7 +103,7 @@ export default function Edit() {
   return (
     <>
       <Template title="Edit Folder" hideBreak={true} />
-      <Modal returnURL={(router.query.returnUrl as string) ?? "/dashboard"} shouldCloseModal={closeModal}>
+      <Modal returnURL={returnURL} shouldCloseModal={closeModal}>
         <>
           {folder && !error && (
             <form className="modal-inner-main" onSubmit={saveEditFolder}>
