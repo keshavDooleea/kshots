@@ -5,8 +5,12 @@ import Error from "../../../../Components/Error";
 import Modal from "../../../../Components/Modal";
 import Template from "../../../../Components/Template";
 import { getBase64, isOnlyNumber } from "../../../../utils/lib/config";
-import { POST } from "../../../../utils/lib/http";
+import { GET, POST } from "../../../../utils/lib/http";
 import { IDBImage } from "../../../../utils/lib/intefaces";
+
+interface IFolderColor {
+  color: string;
+}
 
 const index = () => {
   const [session, setSession] = useSession();
@@ -16,6 +20,7 @@ const index = () => {
   const [description, setDescription] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [src, setSrc] = useState<string>("");
+  const [color, setColor] = useState<string>("");
 
   let canUpload: boolean = true;
 
@@ -36,6 +41,16 @@ const index = () => {
       setError("Sorry, folder id can only be an integer!");
       return;
     }
+
+    const fetchColor = async () => {
+      const response = await GET<IFolderColor>(`folder/${id}/color`);
+
+      if ((response.code as number) === 200) {
+        setColor((response.data as IFolderColor).color);
+      }
+    };
+
+    fetchColor();
   }, [router.isReady]);
 
   // ctrl + v
@@ -84,7 +99,7 @@ const index = () => {
 
   return (
     <>
-      <Template title="Upload Image" />
+      <Template title="Upload Image" hideBreak={true} customBgColor={color} />
       <Modal returnURL={`/folder/${router.query.id}`} shouldCloseModal={closeModal}>
         <>
           {!error && (

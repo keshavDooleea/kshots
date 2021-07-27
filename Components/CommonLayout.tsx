@@ -12,6 +12,7 @@ interface ICommonProps {
   returnUrl?: string;
   hideBreak?: boolean;
   showDelete?: boolean;
+  customBgColor?: string;
 }
 
 interface INavItem {
@@ -22,7 +23,7 @@ interface INavItem {
   cssClass?: string;
 }
 
-const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete }: ICommonProps) => {
+const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete, customBgColor }: ICommonProps) => {
   const [session, setSession] = useSession();
   const router = useRouter();
 
@@ -45,7 +46,7 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete }: ICo
   };
 
   return (
-    <div className={CommonStyles.body}>
+    <div className={CommonStyles.body} style={{ backgroundColor: customBgColor ? customBgColor : "auto" }}>
       <Head title={title}></Head>
 
       <nav className={CommonStyles.nav}>

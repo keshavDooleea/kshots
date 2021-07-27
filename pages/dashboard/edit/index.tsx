@@ -102,7 +102,7 @@ export default function Edit() {
 
   return (
     <>
-      <Template title="Edit Folder" hideBreak={true} />
+      <Template title="Edit Folder" hideBreak={true} customBgColor={folder?.color} />
       <Modal returnURL={returnURL} shouldCloseModal={closeModal}>
         <>
           {folder && !error && (

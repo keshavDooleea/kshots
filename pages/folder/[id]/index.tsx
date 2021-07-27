@@ -64,7 +64,7 @@ const FolderId = () => {
   };
 
   return (
-    <CommonLayout title={"Folder Dashboard"} returnUrl={"/dashboard"} showDelete={!folder?.islock as boolean}>
+    <CommonLayout title={"Folder Dashboard"} returnUrl={"/dashboard"} showDelete={!folder?.islock as boolean} customBgColor={folder?.color}>
       <div className={styles.folderDashboard}>
         <div className="common-header">
           <span className="folder-name">
