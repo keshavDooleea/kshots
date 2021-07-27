@@ -23,10 +23,27 @@
     @include commonStyles.flex(row, flex-end, center);
     @include commonStyles.abs(auto, 5px, 8px, auto, 0, 0);
 
-    img {
-      width: 1.5em;
-      height: 1.5em;
-      margin: 0 5px;
+    span {
+      @include commonStyles.flex(row, flex-end, center);
+
+      &:nth-child(1) {
+        margin-right: 3px;
+      }
+      &:nth-child(2) {
+        margin-left: 5px;
+      }
+
+      &:hover img {
+        filter: brightness(120%);
+        transform: rotate(1turn);
+      }
+
+      img {
+        width: 1.5em;
+        height: 1.5em;
+        margin: 0 5px;
+        transition: 0.5s transform, 0.25s filter;
+      }
     }
   }
 }

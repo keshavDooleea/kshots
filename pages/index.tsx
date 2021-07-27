@@ -36,7 +36,13 @@ export default function Home() {
         </button>
 
         <small className={joinClasses(styles.engineInfo, "subtitle")}>
-          Built with Next JS <img src="/next_js.svg" alt="Next JS Logo" /> and Postgres SQL <img src="/postgres_sql.svg" alt="Postgres SQL Logo" />
+          <span>
+            Built with Next JS <img src="/next_js.svg" alt="Next JS Logo" />
+          </span>
+          &
+          <span>
+            Postgres SQL <img src="/postgres_sql.svg" alt="Postgres SQL Logo" />
+          </span>
         </small>
       </div>
     </div>
