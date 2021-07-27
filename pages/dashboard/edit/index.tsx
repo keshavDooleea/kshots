@@ -119,7 +119,7 @@ export default function Edit() {
                     </div>
                   </Folder>
                 </main>
-                <div className="actions">
+                <div className="modal-actions">
                   <button type="button" onClick={() => setCloseModal(true)}>
                     Close
                   </button>
