@@ -47,6 +47,12 @@ function Dashboard({ title }: IDashboardProps) {
     });
   };
 
+  const getDate = (folderDate: Date) => {
+    const date = new Date(folderDate);
+
+    return <small>{date.toDateString()}</small>;
+  };
+
   return (
     <CommonLayout title={tabTitle}>
       <div className={styles.dashboardMain}>
@@ -66,7 +72,7 @@ function Dashboard({ title }: IDashboardProps) {
               <Folder color={folder.color} ccsClass={styles.icon}>
                 <span>
                   <h4>{folder.name}</h4>
-                  <small>Created on {folder.createdat}</small>
+                  {getDate(folder.createdat)}
                 </span>
                 <div className="folder-edit-icon">
                   <FontAwesomeIcon className="icon" icon={faPenSquare} />
