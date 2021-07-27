@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS Folders (
 	userId    INTEGER	   NOT NULL,	
 	name	  VARCHAR(255) NOT NULL,
 	color	  VARCHAR(255) NOT NULL,
+	islock	  BOOLEAN	   NOT NULL,		
 	createdAt DATE 		   NOT NULL,
 	
 	PRIMARY KEY (id),
