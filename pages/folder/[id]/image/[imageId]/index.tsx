@@ -78,7 +78,7 @@ const ImageId = () => {
   };
 
   return (
-    <CommonLayout title={"Image"} returnUrl={`/folder/${router.query.id}`} customBgColor={folder?.color}>
+    <CommonLayout title={"Image"} returnUrl={`/folder/${router.query.id}`} customBgColor={folder?.color} imgTitle={image?.title}>
       {!error && (
         <>
           <div className={styles.main}>
@@ -92,7 +92,7 @@ const ImageId = () => {
             <div className={styles.right}>
               {image && (
                 <>
-                  <img src={getDecodedBase64(image.src)} alt="Individual screenshot Image" />
+                  <img id="downloadImg" src={getDecodedBase64(image.src)} alt="Individual screenshot Image" />
                   <small className={styles.enlargeText}>Click to enlarge</small>
                   <h4 className={styles.dateText}>{getDate(image?.createdat as Date)}</h4>
                 </>

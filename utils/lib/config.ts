@@ -36,3 +36,5 @@ export const getDecodedBase64 = (src: string): string => {
 
   return base64;
 };
+
+export const generateRandomChar = (numberOfChar: number) => Math.random().toString(36).substring(numberOfChar);

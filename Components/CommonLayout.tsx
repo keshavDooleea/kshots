@@ -5,6 +5,7 @@ import { faSignOutAlt, faPlus, faCaretLeft, faPenSquare, faTrash, faHome, faDown
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import { joinClasses } from "../utils/lib/joinClasses";
+import { generateRandomChar } from "../utils/lib/config";
 
 interface ICommonProps {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ interface ICommonProps {
   hideBreak?: boolean;
   showDelete?: boolean;
   customBgColor?: string;
+  imgTitle?: string;
 }
 
 interface INavItem {
@@ -23,7 +25,7 @@ interface INavItem {
   cssClass?: string;
 }
 
-const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete, customBgColor }: ICommonProps) => {
+const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete, customBgColor, imgTitle }: ICommonProps) => {
   const [session, setSession] = useSession();
   const router = useRouter();
 
@@ -44,6 +46,15 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete, custo
       pathname: "/dashboard/edit",
       query: { id: router.query.id, returnUrl: `/folder/${router.query.id}` },
     });
+  };
+
+  const downloadImage = async () => {
+    const { src } = document.querySelector("img#downloadImg") as HTMLImageElement;
+
+    const anchor = document.createElement("a") as HTMLAnchorElement;
+    anchor.href = src;
+    anchor.download = imgTitle ? imgTitle : generateRandomChar(6);
+    anchor.click();
   };
 
   return (
@@ -71,7 +82,7 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete, custo
             </>
           )}
 
-          {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Download Image" icon={faDownload} reverse={false} />}
+          {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Download Image" icon={faDownload} onClick={downloadImage} reverse={false} />}
           {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Edit Image" icon={faPenSquare} reverse={false} />}
           {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Delete Image" icon={faTrash} reverse={false} cssClass="delete-btn" />}
 
