@@ -43,6 +43,16 @@ textarea {
   }
 }
 
+.delete-btn {
+  --redColor: rgb(226, 104, 104);
+
+  border-color: var(--redColor);
+
+  svg {
+    color: var(--redColor);
+  }
+}
+
 .subtitle {
   opacity: 0.6;
 }
