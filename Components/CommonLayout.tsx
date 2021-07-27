@@ -1,7 +1,7 @@
 import CommonStyles from "../styles/CommonLayout.module.scss";
 import { signOut, useSession } from "next-auth/client";
 import Head from "../Components/Head";
-import { faSignOutAlt, faPlus, faCaretLeft, faPenSquare, faTrash, faHome } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faPlus, faCaretLeft, faPenSquare, faTrash, faHome, faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import { joinClasses } from "../utils/lib/joinClasses";
@@ -71,9 +71,14 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete, custo
             </>
           )}
 
+          {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Download Image" icon={faDownload} reverse={false} />}
+          {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Edit Image" icon={faPenSquare} reverse={false} />}
+          {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Delete Image" icon={faTrash} reverse={false} cssClass="delete-btn" />}
+
           {router.pathname === "/folder/[id]" && <NavItem name="Upload Image" icon={faPlus} onClick={uploadImg} reverse={false} />}
           {router.pathname === "/folder/[id]" && <NavItem name="Edit Folder" icon={faPenSquare} onClick={editFolder} reverse={false} />}
           {router.pathname === "/folder/[id]" && showDelete && <NavItem name="Delete Folder" icon={faTrash} onClick={deleteFolder} reverse={false} cssClass="delete-btn" />}
+
           {router.pathname === "/dashboard" && <NavItem name="Create Folder" icon={faPlus} onClick={createFolder} reverse={false} />}
 
           {!hideBreak && <div className={CommonStyles.break}></div>}

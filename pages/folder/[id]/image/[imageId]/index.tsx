@@ -93,7 +93,8 @@ const ImageId = () => {
               {image && (
                 <>
                   <img src={getDecodedBase64(image.src)} alt="Individual screenshot Image" />
-                  <h4>{getDate(image?.createdat as Date)}</h4>
+                  <small className={styles.enlargeText}>Click to enlarge</small>
+                  <h4 className={styles.dateText}>{getDate(image?.createdat as Date)}</h4>
                 </>
               )}
             </div>

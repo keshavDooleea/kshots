@@ -41,16 +41,32 @@
       max-height: 100%;
       border-radius: var(--radius);
       box-shadow: 0 0 10px 0.2px rgb(0 0 0 / 40%);
+      cursor: pointer;
     }
 
-    img + h4 {
-      @include commonStyles.abs(8px, auto, auto, 50%, -50%, 0);
+    .dateText,
+    .enlargeText {
       text-shadow: rgb(0 0 0 / 50%) 0 10px 10px;
       background-color: white;
       padding: 5px 8px;
       border-radius: var(--radius);
       color: var(--textColor);
       box-shadow: 0 0 10px 0.2px rgb(0 0 0 / 40%);
+    }
+
+    .dateText {
+      @include commonStyles.abs(8px, auto, auto, 50%, -50%, 0);
+    }
+
+    .enlargeText {
+      opacity: 0;
+      @include commonStyles.abs(auto, auto, -10px, 50%, -50%, 0);
+      transition: 0.25s opacity, 0.2s bottom ease-out;
+    }
+
+    img:hover + .enlargeText {
+      opacity: 1;
+      bottom: 8px;
     }
   }
 }
