@@ -68,8 +68,8 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak }: ICommonProps) =
             </>
           )}
 
-          {router.pathname === "/folder/[id]" && <NavItem name="Edit Folder" icon={faPenSquare} onClick={editFolder} reverse={false} />}
           {router.pathname === "/folder/[id]" && <NavItem name="Upload Image" icon={faPlus} onClick={uploadImg} reverse={false} />}
+          {router.pathname === "/folder/[id]" && <NavItem name="Edit Folder" icon={faPenSquare} onClick={editFolder} reverse={false} />}
           {router.pathname === "/folder/[id]" && <NavItem name="Delete Folder" icon={faTrash} reverse={false} cssClass="delete-btn" />}
           {router.pathname === "/dashboard" && <NavItem name="Create Folder" icon={faPlus} onClick={createFolder} reverse={false} />}
 

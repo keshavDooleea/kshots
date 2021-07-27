@@ -250,6 +250,15 @@ textarea {
           border-radius: var(--radius);
           border: 1px solid #aeb8cc;
 
+          .image-main {
+            @include commonStyles.flex(column, center, center);
+            gap: 10px 0;
+
+            label {
+              cursor: pointer;
+            }
+          }
+
           img {
             max-width: 95%;
             max-height: 95%;

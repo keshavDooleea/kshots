@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import Error from "../../../../Components/Error";
 import Modal from "../../../../Components/Modal";
 import Template from "../../../../Components/Template";
@@ -11,7 +11,6 @@ import { IDBImage } from "../../../../utils/lib/intefaces";
 const index = () => {
   const [session, setSession] = useSession();
   const [closeModal, setCloseModal] = useState<boolean>(false);
-  const [canUpload, setCanUpload] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
   const [description, setDescription] = useState<string>("");
@@ -49,6 +48,15 @@ const index = () => {
     }
   };
 
+  // input file upload
+  const handleInputEvent = async (event: ChangeEvent<HTMLInputElement>) => {
+    let { files } = event.target as HTMLInputElement;
+    files = files as FileList;
+
+    const base64 = (await getBase64(files[0])) as string;
+    setSrc(base64);
+  };
+
   const uploadImg = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -79,7 +87,22 @@ const index = () => {
             <form className="modal-inner-main" onSubmit={uploadImg}>
               <h3>Upload Image</h3>
               <div className="upload-image-modal-container">
-                <div className="image-container">{src ? <img src={src} alt="Screenshot image" /> : <p>Ctrl + V to save screenshot</p>}</div>
+                <div className="image-container">
+                  {src ? (
+                    <img src={src} alt="Screenshot image" />
+                  ) : (
+                    <div className="image-main">
+                      <button type="button">
+                        <label>
+                          Upload image
+                          <input type="file" style={{ display: "none" }} onChange={handleInputEvent} />
+                        </label>
+                      </button>
+                      <small>or</small>
+                      <p>Ctrl + V to paste screenshot</p>
+                    </div>
+                  )}
+                </div>
                 <main>
                   <div>
                     <label htmlFor="title">Title</label>
@@ -95,9 +118,7 @@ const index = () => {
                   <button type="button" onClick={() => setCloseModal(true)}>
                     Close
                   </button>
-                  <button type="submit" disabled={canUpload}>
-                    Save Image
-                  </button>
+                  <button type="submit">Save Image</button>
                 </div>
               </div>
             </form>
