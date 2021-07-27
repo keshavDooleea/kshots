@@ -49,20 +49,23 @@ function Dashboard({ title }: IDashboardProps) {
 
   return (
     <CommonLayout title={tabTitle}>
-      <div className={joinClasses("topDiv", styles.main)}>
-        {folders?.map((folder, index) => (
-          <div key={index} className={styles.folderMain} onClick={(event) => onFolderClicked(event, folder.id)}>
-            <Folder color={folder.color} ccsClass={styles.icon}>
-              <span>
-                <h4>{folder.name}</h4>
-                <small>Created on {folder.createdat}</small>
-              </span>
-              <div className="folder-edit-icon">
-                <FontAwesomeIcon className="icon" icon={faPenSquare} />
-              </div>
-            </Folder>
-          </div>
-        ))}
+      <div className={styles.dashboardMain}>
+        <div className={styles.header}>{folders?.length && <small className="subtitle">{folders.length} folders</small>}</div>
+        <div className={joinClasses(styles.main)}>
+          {folders?.map((folder, index) => (
+            <div key={index} className={styles.folderMain} onClick={(event) => onFolderClicked(event, folder.id)}>
+              <Folder color={folder.color} ccsClass={styles.icon}>
+                <span>
+                  <h4>{folder.name}</h4>
+                  <small>Created on {folder.createdat}</small>
+                </span>
+                <div className="folder-edit-icon">
+                  <FontAwesomeIcon className="icon" icon={faPenSquare} />
+                </div>
+              </Folder>
+            </div>
+          ))}
+        </div>
       </div>
     </CommonLayout>
   );
