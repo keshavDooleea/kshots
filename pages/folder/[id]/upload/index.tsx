@@ -137,7 +137,7 @@ const index = () => {
                   <button type="button" onClick={() => setCloseModal(true)}>
                     Close
                   </button>
-                  <button type="submit" disabled={!src} onClick={() => setSrc("")}>
+                  <button type="button" disabled={!src} onClick={() => setSrc("")}>
                     Clear Image
                   </button>
                   <button type="submit" disabled={!src}>

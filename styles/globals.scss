@@ -299,6 +299,24 @@ textarea {
           grid-column: 1 / span 2;
         }
       }
+
+      .delete-modal-container {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 80% 20%;
+
+        .center {
+          flex-direction: column;
+
+          h4 {
+            margin: 45px 0 5px 0;
+
+            span {
+              margin-left: 5px;
+            }
+          }
+        }
+      }
     }
   }
 }

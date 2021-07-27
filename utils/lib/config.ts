@@ -21,3 +21,5 @@ export const getBase64 = (file: File): Promise<ArrayBuffer | string> => {
     reader.onerror = (error) => reject(error);
   });
 };
+
+export const getDate = (date: Date) => new Date(date).toDateString();

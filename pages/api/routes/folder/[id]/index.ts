@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import { Session } from "next-auth";
 import { IDBFolder, INewSession, IResponse } from "../../../../../utils/lib/intefaces";
-import { FOLDERS_SCHEMA } from "../../../../../utils/lib/config";
+import { FOLDERS_SCHEMA, IMAGES_SCHEMA } from "../../../../../utils/lib/config";
 
 const db = require("../../../../../postgres/index");
 
@@ -32,7 +32,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse<any>, session
     } else {
       response = {
         code: 404,
-        message: `Folder with ${id} does not exist`,
+        message: `Folder with id ${id} does not exist`,
       } as IResponse<null>;
     }
 
@@ -72,6 +72,33 @@ const handlePUT = async (req: NextApiRequest, res: NextApiResponse<any>, session
   }
 };
 
+const handleDELETE = async (req: NextApiRequest, res: NextApiResponse<any>, session: INewSession) => {
+  const { id } = req.query;
+
+  try {
+    console.log(`Deleting folder with id ${id} for`, session.user?.name || session.user?.email || session.userId);
+    const deleteImageQuery = `DELETE FROM ${IMAGES_SCHEMA} WHERE userid = $1 AND folderid = $2;`;
+    await db.query(deleteImageQuery, [session.userId, id]);
+
+    const deleteFolderQuery = `DELETE FROM ${FOLDERS_SCHEMA} WHERE userid = $1 AND id = $2;`;
+    await db.query(deleteFolderQuery, [session.userId, id]);
+
+    const response = {
+      code: 200,
+      message: `Deleted folder with ${id} for user ${session.userid}`,
+    } as IResponse<null>;
+
+    res.json(response);
+  } catch (err) {
+    console.log(`Error deleting folder with id ${id} for user ${session.userid}`, err);
+    const response: IResponse<null> = {
+      code: 500,
+      message: `Error deleing Folder with id ${id}`,
+    };
+    res.json(response);
+  }
+};
+
 export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const session = (await getSession({ req })) as INewSession;
 
@@ -81,6 +108,9 @@ export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
       break;
     case "GET":
       handleGET(req, res, session);
+      break;
+    case "DELETE":
+      handleDELETE(req, res, session);
       break;
   }
 };

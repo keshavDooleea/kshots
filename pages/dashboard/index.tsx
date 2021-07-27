@@ -8,6 +8,7 @@ import { joinClasses } from "../../utils/lib/joinClasses";
 import { faPenSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
+import { getDate } from "../../utils/lib/config";
 
 interface IDashboardProps {
   title: string;
@@ -47,12 +48,6 @@ function Dashboard({ title }: IDashboardProps) {
     });
   };
 
-  const getDate = (folderDate: Date) => {
-    const date = new Date(folderDate);
-
-    return <small>{date.toDateString()}</small>;
-  };
-
   return (
     <CommonLayout title={tabTitle}>
       <div className={styles.dashboardMain}>
@@ -72,7 +67,7 @@ function Dashboard({ title }: IDashboardProps) {
               <Folder color={folder.color} ccsClass={styles.icon}>
                 <span>
                   <h4>{folder.name}</h4>
-                  {getDate(folder.createdat)}
+                  <small>{getDate(folder.createdat)}</small>
                 </span>
                 <div className="folder-edit-icon">
                   <FontAwesomeIcon className="icon" icon={faPenSquare} />
