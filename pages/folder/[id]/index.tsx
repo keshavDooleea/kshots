@@ -8,6 +8,7 @@ import { IDBFolder, IDBImage } from "../../../utils/lib/intefaces";
 import { joinClasses } from "../../../utils/lib/joinClasses";
 import { faFolder } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from "../../../styles/FolderDashboard.module.scss";
 
 const FolderId = () => {
   const router = useRouter();
@@ -64,30 +65,32 @@ const FolderId = () => {
 
   return (
     <CommonLayout title={"Folder Dashboard"} returnUrl={"/dashboard"}>
-      <div className="common-header">
-        <span className="folder-name">
-          {folder && (
+      <div className={styles.folderDashboard}>
+        <div className="common-header">
+          <span className="folder-name">
+            {folder && (
+              <>
+                <FontAwesomeIcon className="icon" icon={faFolder} style={{ color: folder?.color }} />
+                <h4 className="subtitle">{folder?.name}</h4>
+              </>
+            )}
+          </span>
+          {images?.length && <small className="subtitle">{images.length} image</small>}
+        </div>
+
+        <div className={joinClasses(styles.main)}>
+          {!error && (
             <>
-              <FontAwesomeIcon className="icon" icon={faFolder} style={{ color: folder?.color }} />
-              <h4 className="subtitle">{folder?.name}</h4>
+              {images?.map((image, index) => (
+                <div key={index} className={styles.item}>
+                  {/* <h1>{image.title}</h1> */}
+                  {calcImg(image.src)}
+                </div>
+              ))}
             </>
           )}
-        </span>
-        {images?.length && <small className="subtitle">{images.length} image</small>}
-      </div>
-
-      <div className={joinClasses("topDiv")}>
+        </div>
         {error && <Error message={error} returnURL="/dashboard" />}
-        {!error && (
-          <div>
-            {images?.map((image, index) => (
-              <div key={index}>
-                <h1>{image.title}</h1>
-                {calcImg(image.src)}
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </CommonLayout>
   );

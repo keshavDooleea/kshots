@@ -17,6 +17,10 @@
   --radius: 8px;
 }
 
+body {
+  overflow: hidden;
+}
+
 a,
 button {
   cursor: pointer;
