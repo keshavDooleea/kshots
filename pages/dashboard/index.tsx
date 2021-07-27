@@ -50,7 +50,10 @@ function Dashboard({ title }: IDashboardProps) {
   return (
     <CommonLayout title={tabTitle}>
       <div className={styles.dashboardMain}>
-        <div className={styles.header}>{folders?.length && <small className="subtitle">{folders.length} folders</small>}</div>
+        <div className="common-header">
+          <span></span>
+          <span>{folders?.length && <small className="subtitle">{folders.length} folders</small>}</span>
+        </div>
         <div className={joinClasses(styles.main)}>
           {folders?.map((folder, index) => (
             <div key={index} className={styles.folderMain} onClick={(event) => onFolderClicked(event, folder.id)}>

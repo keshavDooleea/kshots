@@ -100,7 +100,7 @@ export default function Edit() {
   return (
     <>
       <Template title="Edit Folder" hideBreak={true} />
-      <Modal returnURL="/dashboard" shouldCloseModal={closeModal}>
+      <Modal returnURL={(router.query.returnUrl as string) ?? "/dashboard"} shouldCloseModal={closeModal}>
         <>
           {folder && !error && (
             <form className="modal-inner-main" onSubmit={saveEditFolder}>

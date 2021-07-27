@@ -4,13 +4,16 @@ import CommonLayout from "../../../Components/CommonLayout";
 import Error from "../../../Components/Error";
 import { isOnlyNumber } from "../../../utils/lib/config";
 import { GET } from "../../../utils/lib/http";
-import { IDBImage } from "../../../utils/lib/intefaces";
+import { IDBFolder, IDBImage } from "../../../utils/lib/intefaces";
 import { joinClasses } from "../../../utils/lib/joinClasses";
+import { faFolder } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const FolderId = () => {
   const router = useRouter();
   const [error, setError] = useState<string>("");
   const [images, setImages] = useState<IDBImage[]>();
+  const [folder, setFolder] = useState<IDBFolder>();
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -23,11 +26,22 @@ const FolderId = () => {
       }
 
       let folderId = id;
-      const response = await GET<IDBImage[]>(`image/${folderId}`);
+      const imageResponse = await GET<IDBImage[]>(`image/${folderId}`);
 
-      if (response.code === 200) {
+      if (imageResponse.code === 200) {
         setError("");
-        setImages(response.data);
+        setImages(imageResponse.data);
+      } else {
+        setError("Sorry! An error occured while fetching images!");
+      }
+
+      const folderResponse = await GET<IDBFolder>(`folder/${folderId}`);
+
+      if (folderResponse.code === 200) {
+        setError("");
+        setFolder(folderResponse.data);
+      } else {
+        setError("Sorry! An error occured while fetching current folder!");
       }
     };
 
@@ -50,6 +64,18 @@ const FolderId = () => {
 
   return (
     <CommonLayout title={"Folder Dashboard"} returnUrl={"/dashboard"}>
+      <div className="common-header">
+        <span className="folder-name">
+          {folder && (
+            <>
+              <FontAwesomeIcon className="icon" icon={faFolder} style={{ color: folder?.color }} />
+              <h4 className="subtitle">{folder?.name}</h4>
+            </>
+          )}
+        </span>
+        {images?.length && <small className="subtitle">{images.length} image</small>}
+      </div>
+
       <div className={joinClasses("topDiv")}>
         {error && <Error message={error} returnURL="/dashboard" />}
         {!error && (

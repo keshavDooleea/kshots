@@ -6,13 +6,6 @@
   overflow-y: auto;
 }
 
-.header {
-  width: 100%;
-  height: 45px;
-  @include commonStyles.flex(row, center, flex-end);
-  padding: 0 10px;
-}
-
 .main {
   width: 100%;
   overflow-y: auto;

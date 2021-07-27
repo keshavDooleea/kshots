@@ -288,6 +288,21 @@ textarea {
   filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
 }
 
+.common-header {
+  width: 100%;
+  height: 45px;
+  @include commonStyles.flex(row, center, space-between);
+  padding: 0 10px;
+
+  .folder-name {
+    @include commonStyles.flex(row, center, space-between);
+
+    h4 {
+      margin-left: 5px;
+    }
+  }
+}
+
 .folder-main {
   .folder-edit-icon {
     --iconHeight: 1.3rem;

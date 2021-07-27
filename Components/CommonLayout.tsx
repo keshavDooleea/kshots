@@ -1,7 +1,7 @@
 import CommonStyles from "../styles/CommonLayout.module.scss";
 import { signOut, useSession } from "next-auth/client";
 import Head from "../Components/Head";
-import { faSignOutAlt, faPlus, faCaretLeft } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faPlus, faCaretLeft, faPenSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 
@@ -33,9 +33,12 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak }: ICommonProps) =
   };
 
   const createFolder = async () => router.push("/dashboard/create");
-
-  const uploadImg = async () => {
-    router.push(`/folder/${router.query.id}/upload`);
+  const uploadImg = async () => router.push(`/folder/${router.query.id}/upload`);
+  const editFolder = async () => {
+    router.push({
+      pathname: "/dashboard/edit",
+      query: { id: router.query.id, returnUrl: `/folder/${router.query.id}` },
+    });
   };
 
   return (
@@ -62,7 +65,9 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak }: ICommonProps) =
             </>
           )}
 
+          {router.pathname === "/folder/[id]" && <NavItem name="Edit Folder" icon={faPenSquare} onClick={editFolder} reverse={false} />}
           {router.pathname === "/folder/[id]" && <NavItem name="Upload Image" icon={faPlus} onClick={uploadImg} reverse={false} />}
+          {router.pathname === "/folder/[id]" && <NavItem name="Delete Image" icon={faTrash} reverse={false} />}
           {router.pathname === "/dashboard" && <NavItem name="Create Folder" icon={faPlus} onClick={createFolder} reverse={false} />}
 
           {!hideBreak && <div className={CommonStyles.break}></div>}
