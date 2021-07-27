@@ -11,6 +11,7 @@ interface ICommonProps {
   title: string;
   returnUrl?: string;
   hideBreak?: boolean;
+  showDelete?: boolean;
 }
 
 interface INavItem {
@@ -21,7 +22,7 @@ interface INavItem {
   cssClass?: string;
 }
 
-const CommonLayout = ({ children, title, returnUrl, hideBreak }: ICommonProps) => {
+const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete }: ICommonProps) => {
   const [session, setSession] = useSession();
   const router = useRouter();
 
@@ -70,7 +71,7 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak }: ICommonProps) =
 
           {router.pathname === "/folder/[id]" && <NavItem name="Upload Image" icon={faPlus} onClick={uploadImg} reverse={false} />}
           {router.pathname === "/folder/[id]" && <NavItem name="Edit Folder" icon={faPenSquare} onClick={editFolder} reverse={false} />}
-          {router.pathname === "/folder/[id]" && <NavItem name="Delete Folder" icon={faTrash} reverse={false} cssClass="delete-btn" />}
+          {router.pathname === "/folder/[id]" && showDelete && <NavItem name="Delete Folder" icon={faTrash} reverse={false} cssClass="delete-btn" />}
           {router.pathname === "/dashboard" && <NavItem name="Create Folder" icon={faPlus} onClick={createFolder} reverse={false} />}
 
           {!hideBreak && <div className={CommonStyles.break}></div>}

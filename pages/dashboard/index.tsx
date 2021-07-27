@@ -52,7 +52,13 @@ function Dashboard({ title }: IDashboardProps) {
       <div className={styles.dashboardMain}>
         <div className="common-header">
           <span></span>
-          <span>{folders?.length && <small className="subtitle">{folders.length} folders</small>}</span>
+          <span>
+            {folders?.length && (
+              <small className="subtitle">
+                {folders.length} {folders.length > 1 ? "folders" : "folder"}
+              </small>
+            )}
+          </span>
         </div>
         <div className={joinClasses(styles.main)}>
           {folders?.map((folder, index) => (

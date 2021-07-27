@@ -64,7 +64,7 @@ const FolderId = () => {
   };
 
   return (
-    <CommonLayout title={"Folder Dashboard"} returnUrl={"/dashboard"}>
+    <CommonLayout title={"Folder Dashboard"} returnUrl={"/dashboard"} showDelete={!folder?.islock as boolean}>
       <div className={styles.folderDashboard}>
         <div className="common-header">
           <span className="folder-name">
@@ -75,7 +75,11 @@ const FolderId = () => {
               </>
             )}
           </span>
-          {images?.length && <small className="subtitle">{images.length} image</small>}
+          {images?.length && (
+            <small className="subtitle">
+              {images.length} {images.length > 1 ? "images" : "image"}
+            </small>
+          )}
         </div>
 
         <div className={joinClasses(styles.main)}>
