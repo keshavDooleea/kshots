@@ -38,7 +38,7 @@ export default function Create() {
 
   return (
     <>
-      <Template title="Create Folder" />
+      <Template title="Create Folder" hideBreak={true} />
       <Modal returnURL="/dashboard" shouldCloseModal={closeModal}>
         <form className="modal-inner-main" onSubmit={saveFolder}>
           <h3>Create New Folder</h3>
@@ -56,7 +56,7 @@ export default function Create() {
                 </div>
               </Folder>
             </main>
-            <div className="actions">
+            <div className="modal-actions">
               <button type="button" onClick={() => setCloseModal(true)}>
                 Close
               </button>

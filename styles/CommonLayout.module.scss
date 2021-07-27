@@ -41,9 +41,18 @@
 
   .navRight {
     display: flex;
+    gap: 10px;
+
+    .break {
+      width: 3px;
+      height: 100;
+      background-color: var(--textColor);
+      border: 1px solid var(--textColor);
+      border-radius: 50px;
+    }
 
     button {
-      margin-left: 10px;
+      // margin-left: 10px;
       @include commonStyles.flex(row, center, center);
       gap: 6px;
     }

@@ -2,11 +2,12 @@ import CommonLayout from "./CommonLayout";
 
 interface ITemplate {
   title: string;
+  hideBreak?: boolean;
 }
 
-function Template({ title }: ITemplate) {
+function Template({ title, hideBreak }: ITemplate) {
   return (
-    <CommonLayout title={title}>
+    <CommonLayout title={title} hideBreak={hideBreak}>
       <div className="topDiv"></div>
     </CommonLayout>
   );

@@ -9,6 +9,7 @@ interface ICommonProps {
   children: React.ReactNode;
   title: string;
   returnUrl?: string;
+  hideBreak?: boolean;
 }
 
 interface INavItem {
@@ -18,7 +19,7 @@ interface INavItem {
   reverse: boolean;
 }
 
-const CommonLayout = ({ children, title, returnUrl }: ICommonProps) => {
+const CommonLayout = ({ children, title, returnUrl, hideBreak }: ICommonProps) => {
   const [session, setSession] = useSession();
   const router = useRouter();
 
@@ -54,10 +55,18 @@ const CommonLayout = ({ children, title, returnUrl }: ICommonProps) => {
           )}
         </span>
         <span className={CommonStyles.navRight}>
-          {router.pathname !== "/dashboard" && returnUrl && <NavItem name="Back" icon={faCaretLeft} reverse={true} onClick={() => router.push(returnUrl)} />}
+          {router.pathname !== "/dashboard" && returnUrl && (
+            <>
+              <NavItem name="Back" icon={faCaretLeft} reverse={true} onClick={() => router.push(returnUrl)} />
+              <div className={CommonStyles.break}></div>
+            </>
+          )}
 
           {router.pathname === "/folder/[id]" && <NavItem name="Upload Image" icon={faPlus} onClick={uploadImg} reverse={false} />}
           {router.pathname === "/dashboard" && <NavItem name="Create Folder" icon={faPlus} onClick={createFolder} reverse={false} />}
+
+          {!hideBreak && <div className={CommonStyles.break}></div>}
+
           <NavItem name="Sign Out" icon={faSignOutAlt} onClick={() => signOut({ callbackUrl: "/" })} reverse={false} />
         </span>
       </nav>

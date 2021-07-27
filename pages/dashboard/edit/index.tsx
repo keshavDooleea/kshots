@@ -99,7 +99,7 @@ export default function Edit() {
 
   return (
     <>
-      <Template title="Edit Folder" />
+      <Template title="Edit Folder" hideBreak={true} />
       <Modal returnURL="/dashboard" shouldCloseModal={closeModal}>
         <>
           {folder && !error && (
