@@ -53,7 +53,7 @@ function Dashboard({ title }: IDashboardProps) {
         <div className="common-header">
           <span></span>
           <span>
-            {folders?.length && (
+            {folders && (
               <small className="subtitle">
                 {folders.length} {folders.length > 1 ? "folders" : "folder"}
               </small>
@@ -75,6 +75,12 @@ function Dashboard({ title }: IDashboardProps) {
             </div>
           ))}
         </div>
+
+        {folders?.length === 0 && (
+          <p className="centerAbs">
+            Press <strong>Create Folder</strong> to create a new folder
+          </p>
+        )}
       </div>
     </CommonLayout>
   );

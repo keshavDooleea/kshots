@@ -75,7 +75,7 @@ const FolderId = () => {
               </>
             )}
           </span>
-          {images?.length && (
+          {images && (
             <small className="subtitle">
               {images.length} {images.length > 1 ? "images" : "image"}
             </small>
@@ -94,6 +94,12 @@ const FolderId = () => {
             </>
           )}
         </div>
+        {images?.length === 0 && (
+          <p className="centerAbs">
+            Press <strong>Upload Image</strong> to add a screenshot/photo
+          </p>
+        )}
+
         {error && <Error message={error} returnURL="/dashboard" />}
       </div>
     </CommonLayout>

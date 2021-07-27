@@ -374,3 +374,7 @@ textarea {
 .center {
   @include commonStyles.flexCenter();
 }
+
+.centerAbs {
+  @include commonStyles.absCenter();
+}
