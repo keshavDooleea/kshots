@@ -40,12 +40,12 @@
   }
 
   .navRight {
+    display: flex;
+
     button {
       margin-left: 10px;
-
-      .icon {
-        margin-left: 6px;
-      }
+      @include commonStyles.flex(row, center, center);
+      gap: 6px;
     }
   }
 }

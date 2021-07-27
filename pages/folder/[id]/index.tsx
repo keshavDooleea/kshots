@@ -49,7 +49,7 @@ const FolderId = () => {
   };
 
   return (
-    <CommonLayout title={"Folder Dashboard"}>
+    <CommonLayout title={"Folder Dashboard"} returnUrl={"/dashboard"}>
       <div className={joinClasses("topDiv")}>
         {error && <Error message={error} returnURL="/dashboard" />}
         {!error && (

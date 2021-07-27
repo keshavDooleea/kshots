@@ -1,28 +1,30 @@
 import CommonStyles from "../styles/CommonLayout.module.scss";
 import { signOut, useSession } from "next-auth/client";
 import Head from "../Components/Head";
-import { faSignOutAlt, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faPlus, faCaretLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 
 interface ICommonProps {
   children: React.ReactNode;
   title: string;
+  returnUrl?: string;
 }
 
 interface INavItem {
   name: string;
   icon: any;
   onClick?: () => void;
+  reverse: boolean;
 }
 
-const CommonLayout = ({ children, title }: ICommonProps) => {
+const CommonLayout = ({ children, title, returnUrl }: ICommonProps) => {
   const [session, setSession] = useSession();
   const router = useRouter();
 
-  const NavItem = ({ name, icon, onClick }: INavItem) => {
+  const NavItem = ({ name, icon, onClick, reverse }: INavItem) => {
     return (
-      <button className={CommonStyles.signOutBtn} onClick={onClick}>
+      <button className={CommonStyles.signOutBtn} onClick={onClick} style={{ flexDirection: reverse ? "row-reverse" : "row" }}>
         {name}
         <FontAwesomeIcon icon={icon} className={CommonStyles.icon} />
       </button>
@@ -52,9 +54,11 @@ const CommonLayout = ({ children, title }: ICommonProps) => {
           )}
         </span>
         <span className={CommonStyles.navRight}>
-          {router.pathname === "/folder/[id]" && <NavItem name="Upload Image" icon={faPlus} onClick={uploadImg} />}
-          {router.pathname === "/dashboard" && <NavItem name="Create Folder" icon={faPlus} onClick={createFolder} />}
-          <NavItem name="Sign Out" icon={faSignOutAlt} onClick={() => signOut({ callbackUrl: "/" })} />
+          {router.pathname !== "/dashboard" && returnUrl && <NavItem name="Back" icon={faCaretLeft} reverse={true} onClick={() => router.push(returnUrl)} />}
+
+          {router.pathname === "/folder/[id]" && <NavItem name="Upload Image" icon={faPlus} onClick={uploadImg} reverse={false} />}
+          {router.pathname === "/dashboard" && <NavItem name="Create Folder" icon={faPlus} onClick={createFolder} reverse={false} />}
+          <NavItem name="Sign Out" icon={faSignOutAlt} onClick={() => signOut({ callbackUrl: "/" })} reverse={false} />
         </span>
       </nav>
 
