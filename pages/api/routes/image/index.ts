@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { IMAGES_SCHEMA } from "../../../../utils/lib/config";
+import { IMAGES_SCHEMA, MAX_LIMIT } from "../../../../utils/lib/config";
 import { IDBImage, INewSession, IResponse } from "../../../../utils/lib/intefaces";
 import { getSession } from "next-auth/client";
 
@@ -8,6 +8,9 @@ const db = require("../../../../postgres");
 export const config = {
   api: {
     externalResolver: true,
+    bodyParser: {
+      sizeLimit: MAX_LIMIT,
+    },
   },
 };
 

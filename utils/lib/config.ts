@@ -1,6 +1,8 @@
 export const isLocal = process.env.NODE_ENV !== "production";
 export const serverURL = isLocal ? "http://localhost:3000/api/routes" : "";
 
+export const MAX_LIMIT = "5mb";
+
 // FOLDER
 export const COLORS = ["rosybrown", "#fbae3c", "#a5a58d", "#669bbc", "#177e89", "#3b3e46"];
 
