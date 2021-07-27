@@ -35,15 +35,17 @@ export default function Home() {
           <p>Sign In via Github</p>
         </button>
 
-        <small className={joinClasses(styles.engineInfo, "subtitle")}>
-          <span>
-            Built with Next JS <img src="/next_js.svg" alt="Next JS Logo" />
-          </span>
-          &
-          <span>
-            Postgres SQL <img src="/postgres_sql.svg" alt="Postgres SQL Logo" />
-          </span>
-        </small>
+        <a href="https://github.com/keshavDooleea/kshots?files=1" target="_blank">
+          <small className={joinClasses(styles.engineInfo, "subtitle")}>
+            <span>
+              Built with Next JS <img src="/next_js.svg" alt="Next JS Logo" />
+            </span>
+            &
+            <span>
+              Postgres SQL <img src="/postgres_sql.svg" alt="Postgres SQL Logo" />
+            </span>
+          </small>
+        </a>
       </div>
     </div>
   );

@@ -62,6 +62,7 @@
       opacity: 0;
       @include commonStyles.abs(auto, auto, -10px, 50%, -50%, 0);
       transition: 0.25s opacity, 0.2s bottom ease-out;
+      pointer-events: none;
     }
 
     img:hover + .enlargeText {
