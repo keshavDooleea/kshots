@@ -17,6 +17,8 @@ const index = () => {
   const [title, setTitle] = useState<string>("");
   const [src, setSrc] = useState<string>("");
 
+  let canUpload: boolean = true;
+
   const router = useRouter();
 
   useEffect(() => {
@@ -59,6 +61,8 @@ const index = () => {
 
   const uploadImg = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!src) return;
 
     const image: IDBImage = {} as IDBImage;
     image.description = description;
@@ -118,7 +122,12 @@ const index = () => {
                   <button type="button" onClick={() => setCloseModal(true)}>
                     Close
                   </button>
-                  <button type="submit">Save Image</button>
+                  <button type="submit" disabled={!src} onClick={() => setSrc("")}>
+                    Clear Image
+                  </button>
+                  <button type="submit" disabled={!src}>
+                    Save Image
+                  </button>
                 </div>
               </div>
             </form>
