@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import CommonLayout from "../../../Components/CommonLayout";
 import Error from "../../../Components/Error";
-import { isOnlyNumber } from "../../../utils/lib/config";
+import { getDecodedBase64, isOnlyNumber } from "../../../utils/lib/config";
 import { GET } from "../../../utils/lib/http";
 import { IDBFolder, IDBImage } from "../../../utils/lib/intefaces";
 import { joinClasses } from "../../../utils/lib/joinClasses";
@@ -49,20 +49,6 @@ const FolderId = () => {
     fetchImages();
   }, [router.isReady]);
 
-  const calcImg = (src: string) => {
-    // format is decode(realBase64String, 'base64')
-
-    const startIndex = src.indexOf("(") + 1;
-    const endIndex = src.indexOf(",");
-
-    const encoded = src.substring(startIndex, endIndex);
-    const base64 = `data:image/png;base64,${encoded}`;
-
-    // update image.src object here
-
-    return <img src={base64} alt="Screenshot Image" width={100} />;
-  };
-
   const openImage = (folderId: number, imageId: number) => {
     router.push({
       pathname: "/folder/[id]/image/[imageId]",
@@ -96,7 +82,7 @@ const FolderId = () => {
                 <>
                   {images?.map((image, index) => (
                     <div key={index} className={styles.item} onClick={() => openImage(image.folderid, image.id)}>
-                      {calcImg(image.src)}
+                      <img src={getDecodedBase64(image.src)} alt="Screenshot Image" />;
                     </div>
                   ))}
                 </>

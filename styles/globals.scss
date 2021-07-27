@@ -13,7 +13,7 @@
   --textColor: #063064;
   --mainHeight: 85vh;
   --mainWidth: 90vw;
-
+  --headerHeight: 45px;
   --radius: 8px;
 }
 
@@ -331,7 +331,7 @@ textarea {
 
 .common-header {
   width: 100%;
-  height: 45px;
+  height: var(--headerHeight);
   @include commonStyles.flex(row, center, space-between);
   padding: 0 10px;
 

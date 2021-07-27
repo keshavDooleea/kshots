@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import { IDBImage, INewSession, IResponse } from "../../../../../../../utils/lib/intefaces";
-import { FOLDERS_SCHEMA, IMAGES_SCHEMA } from "../../../../../../../utils/lib/config";
+import { FOLDERS_SCHEMA, IMAGES_SCHEMA, IMG_SRC } from "../../../../../../../utils/lib/config";
 
 const db = require("../../../../../../../postgres");
 
@@ -17,7 +17,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse<any>, session
   try {
     // get folder with id
     console.log(`Getting image #3 for folder with id ${folderid} for`, session.user?.name || session.user?.email || session.userId);
-    const getQuery = `SELECT * FROM ${IMAGES_SCHEMA} WHERE userid = $1 AND folderid = $2 AND id = $3;`;
+    const getQuery = `SELECT id, userid, folderid, ${IMG_SRC} as src, createdat, title, description FROM ${IMAGES_SCHEMA} WHERE userid = $1 AND folderid = $2 AND id = $3;`;
     let { rows } = await db.query(getQuery, [session.userId, folderid, imageid]);
 
     let response = {};
