@@ -34,6 +34,10 @@ export default function Home() {
           <FontAwesomeIcon icon={faGithub} className={styles.icon} />
           <p>Sign In via Github</p>
         </button>
+
+        <small className={joinClasses(styles.engineInfo, "subtitle")}>
+          Built with Next JS <img src="/next_js.svg" alt="Next JS Logo" /> and Postgres SQL <img src="/postgres_sql.svg" alt="Postgres SQL Logo" />
+        </small>
       </div>
     </div>
   );
