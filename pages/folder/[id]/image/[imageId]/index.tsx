@@ -124,15 +124,18 @@ const ImageId = () => {
                 )}
                 <div className={styles.right}>
                   {image && (
-                    <span
-                      onClick={() => {
-                        router.push({
-                          pathname: "/folder/[id]/image/[imageId]",
-                          query: { id: router.query.id, imageId: router.query.imageId, enlarge: true },
-                        });
-                      }}
-                    >
-                      <img id="downloadImg" src={getDecodedBase64(image.src)} alt="Individual screenshot Image" />
+                    <span>
+                      <img
+                        id="downloadImg"
+                        src={getDecodedBase64(image.src)}
+                        alt="Individual screenshot Image"
+                        onClick={() => {
+                          router.push({
+                            pathname: "/folder/[id]/image/[imageId]",
+                            query: { id: router.query.id, imageId: router.query.imageId, enlarge: true },
+                          });
+                        }}
+                      />
                       <small className={styles.enlargeText}>Click to enlarge</small>
                       <h4 className={styles.dateText}>{getDate(image?.createdat as Date)}</h4>
                     </span>
