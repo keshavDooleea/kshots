@@ -11,6 +11,7 @@ export const USERS_SCHEMA = "kshots.Users";
 export const FOLDERS_SCHEMA = "kshots.Folders";
 export const IMAGES_SCHEMA = "kshots.Images";
 export const IMG_SRC = `convert_from(decode(encode(src, 'base64'), 'base64'), 'UTF8')`;
+export const DECODE_IMG = (src: string) => `decode(${src.split(",")[1]}, 'base64')`; // base64 encoding
 
 export const isOnlyNumber = (id: string): boolean => {
   return !(id as string).match(/^[0-9]+$/);

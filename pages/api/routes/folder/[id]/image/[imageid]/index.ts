@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 import { IDBImage, INewSession, IResponse } from "../../../../../../../utils/lib/intefaces";
-import { FOLDERS_SCHEMA, IMAGES_SCHEMA, IMG_SRC } from "../../../../../../../utils/lib/config";
+import { DECODE_IMG, IMAGES_SCHEMA, IMG_SRC } from "../../../../../../../utils/lib/config";
 
 const db = require("../../../../../../../postgres");
 
@@ -70,6 +70,31 @@ const handleDELETE = async (req: NextApiRequest, res: NextApiResponse<any>, sess
   }
 };
 
+const handlePUT = async (req: NextApiRequest, res: NextApiResponse<any>, session: INewSession) => {
+  const image = req.body as IDBImage;
+  const { id: folderid, imageid } = req.query;
+
+  try {
+    console.log(`Updating image with id ${imageid} for folder with id ${folderid} for`, session.user?.name || session.user?.email || session.userId);
+    const postQuery = `UPDATE ${IMAGES_SCHEMA} SET src = $1, title = $2, description = $3 WHERE userid = $4 AND folderid = $5 AND id = $6;`;
+    await db.query(postQuery, [DECODE_IMG(image.src), image.title, image.description, session.userId, folderid, imageid]);
+
+    const response = {
+      code: 200,
+      message: `Updated image with id ${imageid} for folder with ${folderid} for user ${session.userid}`,
+    } as IResponse<null>;
+
+    res.json(response);
+  } catch (err) {
+    console.log(`Error updating image with id ${imageid} for folder with id ${folderid} for user ${session.userid}`, err);
+    const response: IResponse<null> = {
+      code: 500,
+      message: `Error updating image with id ${imageid} for folder with id ${folderid}`,
+    };
+    res.json(response);
+  }
+};
+
 export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const session = (await getSession({ req })) as INewSession;
 
@@ -79,6 +104,9 @@ export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
       break;
     case "DELETE":
       handleDELETE(req, res, session);
+      break;
+    case "PUT":
+      handlePUT(req, res, session);
       break;
   }
 };

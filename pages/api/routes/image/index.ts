@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { IMAGES_SCHEMA, MAX_LIMIT } from "../../../../utils/lib/config";
+import { DECODE_IMG, IMAGES_SCHEMA, MAX_LIMIT } from "../../../../utils/lib/config";
 import { IDBImage, INewSession, IResponse } from "../../../../utils/lib/intefaces";
 import { getSession } from "next-auth/client";
 
@@ -17,12 +17,11 @@ export const config = {
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse<any>, session: INewSession) => {
   try {
     const image = req.body as IDBImage;
-    image.src = image.src.split(",")[1];
 
     // save image
     console.log("saving new image for", session.user?.name || session.user?.email || session.userId);
     const saveQuery = `INSERT INTO ${IMAGES_SCHEMA} (userId, folderid, src, createdat, title, description) VALUES ($1, $2, $3, $4, $5, $6)`;
-    await db.query(saveQuery, [session.userId, image.folderid, `decode(${image.src}, 'base64')`, new Date(), image.title, image.description]);
+    await db.query(saveQuery, [session.userId, image.folderid, DECODE_IMG(image.src), new Date(), image.title, image.description]);
 
     const response: IResponse<null> = {
       code: 200,

@@ -86,9 +86,13 @@ const Delete = () => {
                   <p>Are you sure you want to delete the following image?</p>
 
                   <h4>
-                    {image?.title && <>{image.title} </>}
+                    {image?.title && (
+                      <>
+                        {image.title} <span className="from">from</span> &nbsp;
+                      </>
+                    )}
                     <FontAwesomeIcon className="icon" icon={faFolder} style={{ color: folder?.color }} />
-                    <span>{folder?.name}</span>
+                    <span className="folder-name">{folder?.name}</span>
                   </h4>
                   <img src={getDecodedBase64(image?.src as string)} alt="Image to be deleted" className="deleted-img" />
 

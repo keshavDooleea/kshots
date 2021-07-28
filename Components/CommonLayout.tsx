@@ -48,6 +48,12 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete, custo
       query: { id: router.query.id, returnUrl: `/folder/${router.query.id}` },
     });
   };
+  const editImage = async () => {
+    router.push({
+      pathname: "/folder/[id]/upload",
+      query: { id: router.query.id, imageId: router.query.imageId },
+    });
+  };
 
   const downloadImage = async () => {
     const { src } = document.querySelector("img#downloadImg") as HTMLImageElement;
@@ -84,7 +90,7 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete, custo
           )}
 
           {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Download Image" icon={faDownload} onClick={downloadImage} reverse={false} />}
-          {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Edit Image" icon={faPenSquare} reverse={false} />}
+          {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Edit Image" icon={faPenSquare} onClick={editImage} reverse={false} />}
           {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Delete Image" icon={faTrash} reverse={false} onClick={deleteImage} cssClass="delete-btn" />}
 
           {router.pathname === "/folder/[id]" && <NavItem name="Upload Image" icon={faPlus} onClick={uploadImg} reverse={false} />}
