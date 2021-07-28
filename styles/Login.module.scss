@@ -20,8 +20,11 @@
   }
 
   .engineInfo {
-    @include commonStyles.flex(row, flex-end, center);
     @include commonStyles.abs(auto, 5px, 8px, auto, 0, 0);
+
+    small {
+      @include commonStyles.flex(row, flex-end, center);
+    }
 
     span {
       @include commonStyles.flex(row, flex-end, center);
