@@ -46,12 +46,39 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse<any>, session
   }
 };
 
+const handleDELETE = async (req: NextApiRequest, res: NextApiResponse<any>, session: INewSession) => {
+  const { id, imageid } = req.query;
+
+  try {
+    console.log(`Deleting image with id ${imageid} folder with id ${id} for`, session.user?.name || session.user?.email || session.userId);
+    const deleteImageQuery = `DELETE FROM ${IMAGES_SCHEMA} WHERE userid = $1 AND folderid = $2 AND id = $3;`;
+    await db.query(deleteImageQuery, [session.userId, id, imageid]);
+
+    const response = {
+      code: 200,
+      message: `Deleted image with ${imageid} in folder with id ${id} for user ${session.userid}`,
+    } as IResponse<null>;
+
+    res.json(response);
+  } catch (err) {
+    console.log(`Error deleting image with ${imageid} in folder with id ${id} for user ${session.userid}`, err);
+    const response: IResponse<null> = {
+      code: 500,
+      message: `Error deleing image with ${imageid} in folder with id ${id}`,
+    };
+    res.json(response);
+  }
+};
+
 export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
   const session = (await getSession({ req })) as INewSession;
 
   switch (req.method) {
     case "GET":
       handleGET(req, res, session);
+      break;
+    case "DELETE":
+      handleDELETE(req, res, session);
       break;
   }
 };

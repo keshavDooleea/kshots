@@ -319,6 +319,14 @@ textarea {
               margin-left: 5px;
             }
           }
+
+          .deleted-img {
+            max-width: 60%;
+            max-height: 60%;
+            margin: 10px 0;
+            border-radius: var(--radius);
+            box-shadow: 0 0 10px 0.2px rgb(0 0 0 / 40%);
+          }
         }
       }
     }

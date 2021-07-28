@@ -41,6 +41,7 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete, custo
   const createFolder = async () => router.push("/dashboard/create");
   const uploadImg = async () => router.push(`/folder/${router.query.id}/upload`);
   const deleteFolder = async () => router.push(`/folder/${router.query.id}/delete`);
+  const deleteImage = async () => router.push(`/folder/${router.query.id}/image/${router.query.imageId}/delete`);
   const editFolder = async () => {
     router.push({
       pathname: "/dashboard/edit",
@@ -84,7 +85,7 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete, custo
 
           {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Download Image" icon={faDownload} onClick={downloadImage} reverse={false} />}
           {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Edit Image" icon={faPenSquare} reverse={false} />}
-          {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Delete Image" icon={faTrash} reverse={false} cssClass="delete-btn" />}
+          {router.pathname === "/folder/[id]/image/[imageId]" && <NavItem name="Delete Image" icon={faTrash} reverse={false} onClick={deleteImage} cssClass="delete-btn" />}
 
           {router.pathname === "/folder/[id]" && <NavItem name="Upload Image" icon={faPlus} onClick={uploadImg} reverse={false} />}
           {router.pathname === "/folder/[id]" && <NavItem name="Edit Folder" icon={faPenSquare} onClick={editFolder} reverse={false} />}
