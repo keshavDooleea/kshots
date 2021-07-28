@@ -10,6 +10,7 @@ import { faFolder, faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import ImageModal from "../../../../../Components/ImageModal";
+import Template from "../../../../../Components/Template";
 
 interface ImageItemProp {
   itemName: string;
@@ -109,7 +110,14 @@ const ImageId = () => {
   return (
     <>
       {shouldEnlarge ? (
-        <>{image && <ImageModal src={(image as IDBImage).src} setShouldEnlarge={setShouldEnlarge} resetURL={resetURL} />}</>
+        <>
+          {image && (
+            <>
+              <Template title="Enlarged Image" customBgColor={folder?.color}></Template>
+              <ImageModal src={(image as IDBImage).src} setShouldEnlarge={setShouldEnlarge} resetURL={resetURL} />
+            </>
+          )}
+        </>
       ) : (
         <CommonLayout title={"Image"} returnUrl={`/folder/${router.query.id}`} customBgColor={folder?.color} imgTitle={image?.title}>
           {!error && (
