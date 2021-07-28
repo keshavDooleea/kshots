@@ -3,13 +3,16 @@ import isLocal from "../utils/lib/config";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl = {
+    rejectUnauthorized: false,
+  }
 });
 
-if (!isLocal) {
-  pool.ssl = {
-    rejectUnauthorized: false,
-  };
-}
+// if (!isLocal) {
+//   pool.ssl = {
+//     rejectUnauthorized: false,
+//   };
+// }
 
 module.exports = {
   async query(text, params) {
