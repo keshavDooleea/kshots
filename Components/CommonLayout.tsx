@@ -57,10 +57,12 @@ const CommonLayout = ({ children, title, returnUrl, hideBreak, showDelete, custo
 
   const downloadImage = async () => {
     const { src } = document.querySelector("img#downloadImg") as HTMLImageElement;
+    const watermark = "kshots";
+    const downloadName = imgTitle ? imgTitle : generateRandomChar(6);
 
     const anchor = document.createElement("a") as HTMLAnchorElement;
     anchor.href = src;
-    anchor.download = imgTitle ? imgTitle : generateRandomChar(6);
+    anchor.download = `${watermark}_${downloadName}`;
     anchor.click();
   };
 
