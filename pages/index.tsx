@@ -35,7 +35,7 @@ export default function Home() {
           <p>Sign In via Github</p>
         </button>
 
-        <a href="https://github.com/keshavDooleea/kshots?files=1" target="_blank">
+        <a href="https://github.com/keshavDooleea/kshots?files=1" target="_blank" rel="noreferrer">
           <small className={joinClasses(styles.engineInfo, "subtitle")}>
             <span>
               Built with Next JS <img src="/next_js.svg" alt="Next JS Logo" />

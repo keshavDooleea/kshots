@@ -11,7 +11,7 @@ interface IFolderColor {
   color: string;
 }
 
-const index = () => {
+const Upload = () => {
   const [closeModal, setCloseModal] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -177,4 +177,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Upload;
