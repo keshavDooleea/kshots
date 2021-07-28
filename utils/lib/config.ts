@@ -1,5 +1,5 @@
 export const isLocal = process.env.NODE_ENV !== "production";
-export const serverURL = isLocal ? "http://localhost:3000/api/routes" : "";
+export const serverURL = isLocal ? "http://localhost:3000/api/routes" : "https://kshots.vercel.app/api/routes";
 
 export const MAX_LIMIT = "5mb";
 
