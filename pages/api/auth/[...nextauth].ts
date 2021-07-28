@@ -1,7 +1,7 @@
 import NextAuth, { Account, NextAuthOptions, Profile, User } from "next-auth";
 import Providers from "next-auth/providers";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { USERS_SCHEMA } from "../../../utils/lib/config";
+import { GITHUB_ID, GITHUB_SECRET, USERS_SCHEMA } from "../../../utils/lib/config";
 
 const db = require("../../../postgres");
 
@@ -26,8 +26,8 @@ const userHandler = async (user: User, account: Account, profile: Profile) => {
 const options: NextAuthOptions = {
   providers: [
     Providers.GitHub({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
+      clientId: GITHUB_ID,
+      clientSecret: GITHUB_SECRET,
       scope: "read:user",
     }),
   ],

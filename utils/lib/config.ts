@@ -3,11 +3,14 @@ export const serverURL = isLocal ? "http://localhost:3000/api/routes" : "https:/
 
 export const MAX_LIMIT = "5mb";
 
+// NEXT AUTH
+export const GITHUB_ID = isLocal ? process.env.GITHUB_DEV_ID : process.env.GITHUB_PROD_ID;
+export const GITHUB_SECRET = isLocal ? process.env.GITHUB_DEV_SECRET : process.env.GITHUB_PROD_SECRET;
+
 // FOLDER
 export const COLORS = ["rosybrown", "#fbae3c", "#a5a58d", "#669bbc", "#177e89", "#3b3e46"];
 
 // POSTGRESS
-const DB_NAME = isLocal ? "kshots" : process.env.HEROKU_DB_NAME;
 export const USERS_SCHEMA = "kshots.Users";
 export const FOLDERS_SCHEMA = "kshots.Folders";
 export const IMAGES_SCHEMA = "kshots.Images";
