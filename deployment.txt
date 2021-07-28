@@ -1,0 +1,16 @@
+Deployment Steps:
+
+NEXT JS
+	Deploy to vercel and push to master
+
+POSTGRESQL
+	- Add env var to vercal project settings
+	- Create Heroku app with Heroku Postgres add-on (no need to push project since we only need an online db to connect to)
+	- From terminal, go to postgres schema path and connect to heroku via: psql -h [**Host Name**] -U [**User Name**] [**database Name**]
+	  Or, run Heroku CLI command under heroku/project/settings and add "< schemas.sql" to read and create Tables 
+	- Copy paste DATABASE_URL to vercel env
+	- Add following code to Pool Constructor if process.env.Node === production 
+		ssl: {
+    			rejectUnauthorized: false
+  		}
+	
