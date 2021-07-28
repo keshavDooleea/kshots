@@ -3,10 +3,6 @@ export const serverURL = isLocal ? "http://localhost:3000/api/routes" : "https:/
 
 export const MAX_LIMIT = "5mb";
 
-// NEXT AUTH
-export const GITHUB_ID = isLocal ? process.env.GITHUB_DEV_ID : process.env.GITHUB_PROD_ID;
-export const GITHUB_SECRET = isLocal ? process.env.GITHUB_DEV_SECRET : process.env.GITHUB_PROD_SECRET;
-
 // FOLDER
 export const COLORS = ["rosybrown", "#fbae3c", "#a5a58d", "#669bbc", "#177e89", "#3b3e46"];
 
